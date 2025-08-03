@@ -104,15 +104,16 @@ function drawCanadiantire() {
   fill(0)
 }
 
-
 class Dora {
-  constructor(x, y) {
+  constructor(x, y, s = 1) {
     this.x = x;
     this.y = y;
+    this.scale = s;
   }
   draw() {
     push()
     translate(this.x, this.y); // to move the whole character
+    scale(this.s); // apply scale from the constructor
 
     fill(255)
 
