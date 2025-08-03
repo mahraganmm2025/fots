@@ -1,0 +1,33 @@
+speed
+scoring
+3 sizes per emoji, smallest = most points
+
+tree
+
+love = apple
+joy = orange
+peace = strawberry
+patience = lemon
+kindness = watermelon
+goodness = mango
+faithfulness = kiwi
+gentleness = banana
+self-control = blueberry
+
+bomb
+broken heart
+sad face
+angry face
+thumbs down
+
+each kid will make an avatar -> those will be the default "skins" when a new user is in
+each of these default characters will be a class in the code
+
+Schedule:
+- Finish the characters (make basket - melanie)
+  - put the characters at the bottom and make arms up
+- Make characters + basket move
+- Fruit emojis (make them drop)
+- Scoring (offline)
+- Scoring (online)
+- Appify (us)
