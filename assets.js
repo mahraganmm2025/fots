@@ -53,35 +53,48 @@ function drawRaul() {
   pop()
 }
 
-function drawMegan() {
-  push()
-  fill(255)
-  beginShape()
-  vertex(216, 78)
-  vertex(290, 42)
-  vertex(288, 115)
-  vertex(216, 78)
-  endShape()
+class Cat {
+  constructor(x, y, s = 1) {
+    this.x = x;
+    this.y = y;
+    this.s = s;
+  }
+  draw() {
+    push()
+    translate(this.x, this.y); // to move the whole character
+    scale(this.s); // apply scale from the constructor
+    push()
+    fill(255)
+    beginShape()
+    vertex(216, 78)
+    vertex(290, 42)
+    vertex(288, 115)
+    vertex(216, 78)
+    endShape()
 
-  beginShape()
-  vertex(170, 78)
-  vertex(95, 42)
-  vertex(105, 123)
-  vertex(170, 78)
-  endShape()
+    beginShape()
+    vertex(170, 78)
+    vertex(95, 42)
+    vertex(105, 123)
+    vertex(170, 78)
+    endShape()
 
 
-  ellipse(200, 300, 150, 200)
-  ellipse(200, 150, 200, 150)
-  ellipse(200, 300, 100, 150)
-  ellipse(280, 200, 50, 180)
-  ellipse(120, 200, 50, 180)
+    ellipse(200, 300, 150, 200)
+    ellipse(200, 150, 200, 150)
+    ellipse(200, 300, 100, 150)
+    ellipse(280, 200, 50, 180)
+    ellipse(120, 200, 50, 180)
 
-  line(140, 150, 50, 50)
+    line(140, 150, 50, 50)
 
-  pop()
+    pop()
+  }
+  move(dx, dy) {
+    this.x += dx;
+    this.y += dy;
+  }
 }
-
 function drawCanadiantire() {
   background(220);
   fill(252, 69, 3)
@@ -108,7 +121,7 @@ class Dora {
   constructor(x, y, s = 1) {
     this.x = x;
     this.y = y;
-    this.scale = s;
+    this.s = s;
   }
   draw() {
     push()
@@ -142,17 +155,36 @@ class Dora {
     rect(235, 70, 80, 25)
     pop()
 
-    // body
+    push()
+    // face
     rect(250, 50, 50, 50)
+    // bangs
+    push()
+    fill(41, 28, 19)
+    rect(252.5, 50, 45, 7)
+    pop()
+    // neck
     rect(262.5, 100, 25, 15)
+    // body 
+    fill(235, 110, 197)
     rect(225, 110, 100, 100)
-    rect(237.5, 210, 25, 50)
-    rect(287.5, 210, 25, 50)
+    // shorts
+    fill(224, 144, 22)
+    rect(237.5, 210, 25, 25)
+    rect(287.5, 210, 25, 25)
+    pop()
+
+    // legs
+    rect(237.5, 235, 25, 40)
+    rect(287.5, 235, 25, 40)
 
     // face features
+    push()
     line(265, 60, 265, 70)
     line(285, 60, 285, 70)
+    fill(224, 22, 190)
     arc(275, 80, 20, 20, radians(0), radians(180))
+    pop()
 
     // name
     stroke(0)
@@ -160,6 +192,18 @@ class Dora {
     text("Dora", 255, 175)
 
     pop()
+
+    // basket
+    push()
+    fill(150, 126, 17)
+    arc(200, 200, 150, 150, radians(0), radians(180))
+    arc(200, 200, 100, 100, radians(180), radians(0))
+    pop()
+    push()
+    fill(107, 218, 248)
+    arc(200, 200, 80, 80, radians(180), radians(0))
+    pop()
+
   }
 
   move(dx, dy) {
@@ -180,5 +224,9 @@ function drawAlex() {
   fill(0);
   text("(" + mouseX + "," + mouseY + " )", mouseX, mouseY);
 }
+function drawBasket() {
+  arc(200, 200, 100, 100, radians(180), radians(0))
+}
+
 
 let emojiArray = ['🍎', '🍊', '🍓', '🍎', '🍊', '🍓', '🍋', '🍉', '🥭', '🥝', '🍌', '🫐', '💣', '💔', '☹️', '😡', '👎'];
