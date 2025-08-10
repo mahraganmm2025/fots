@@ -24,10 +24,11 @@ each kid will make an avatar -> those will be the default "skins" when a new use
 each of these default characters will be a class in the code
 
 Schedule:
-- Finish the characters (make basket - melanie)
+- Finish the characters (make basket - melanie)  ✅
   - put the characters at the bottom and make arms up
-- Make characters + basket move
+- Make characters + basket move  ✅
 - Fruit emojis (make them drop)
 - Scoring (offline)
 - Scoring (online)
 - Appify (us)
+- put limits on where she can go

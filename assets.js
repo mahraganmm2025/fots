@@ -95,6 +95,7 @@ class Cat {
     this.y += dy;
   }
 }
+
 function drawCanadiantire() {
   background(220);
   fill(252, 69, 3)
@@ -191,26 +192,68 @@ class Dora {
     fill(0)
     text("Dora", 255, 175)
 
-    pop()
-
     // basket
     push()
-    fill(150, 126, 17)
-    arc(200, 200, 150, 150, radians(0), radians(180))
-    arc(200, 200, 100, 100, radians(180), radians(0))
-    pop()
+    noStroke()
+    //outer basket
+    fill(99,70,51)
+    rect(100,200,200,75)
+    arc(200,275,200,100,radians(0),radians(180))
+
+
+    //inner basket/rim
+    fill(56, 41, 31)
+    stroke(84, 60, 44)
+    strokeWeight(13)
+    ellipse(200,200,200,30)
+
+    //handle
+    noFill()
+    stroke(89, 67, 52)
+    strokeWeight(8)
+
     push()
-    fill(107, 218, 248)
-    arc(200, 200, 80, 80, radians(180), radians(0))
+    rotate(-0.5)
+    arc(6,230,25,100,radians(180),radians(-45))
+    pop()
+
+
+    push()
+    rotate(0.5)
+    arc(345,40,25,100,radians(216),radians(-10))
+    pop()
+
+    //basket lining
+    strokeWeight(1)
+    stroke(84, 60, 45)
+    noFill()
+    arc(200,210,199,35,radians(0),radians(180))
+    arc(200,225,199,40,radians(0),radians(180))
+    arc(200,240,199,45,radians(0),radians(180))
+    arc(200,255,199,50,radians(0),radians(180))
+    arc(200,270,199,55,radians(0),radians(180))
+    arc(200,285,192,60,radians(5),radians(175))
+    pop()
+
+    // left arm
+    push()
+    fill(255, 255, 255)
+    beginShape()
+    vertex(225, 123)
+    vertex(175, 180)
+    vertex(195, 180)
+    vertex(225, 145)
+    vertex(225, 123)
+    endShape()
+    pop()
+
     pop()
 
   }
-
   move(dx, dy) {
-    this.x += dx;
+    this.x += dx;//x = x + 1
     this.y += dy;
   }
-
 }
 
 function drawAlex() {
@@ -224,9 +267,57 @@ function drawAlex() {
   fill(0);
   text("(" + mouseX + "," + mouseY + " )", mouseX, mouseY);
 }
-function drawBasket() {
-  arc(200, 200, 100, 100, radians(180), radians(0))
-}
 
+class Basket{
+  constructor(x, y, s = 1) {
+    this.x = x;
+    this.y = y;
+    this.s = s;
+  }
+    draw(){
+      push()
+      translate(this.x, this.y); // to move the whole character
+      scale(this.s);
+      noStroke()
+      //outer basket
+      fill(99,70,51)
+      rect(100,200,200,75)
+      arc(200,275,200,100,radians(0),radians(180))
+
+
+      //inner basket/rim
+      fill(56, 41, 31)
+      stroke(84, 60, 44)
+      strokeWeight(13)
+      ellipse(200,200,200,30)
+
+      //handle
+      noFill()
+      stroke(89, 67, 52)
+      strokeWeight(8)
+
+      push()
+      rotate(-0.5)
+      arc(6,230,25,100,radians(180),radians(-45))
+      pop()
+
+
+      push()
+      rotate(0.5)
+      arc(345,40,25,100,radians(216),radians(-10))
+      pop()
+
+      //basket lining
+      strokeWeight(1)
+      stroke(84, 60, 45)
+      noFill()
+      arc(200,210,199,35,radians(0),radians(180))
+      arc(200,225,199,40,radians(0),radians(180))
+      arc(200,240,199,45,radians(0),radians(180))
+      arc(200,255,199,50,radians(0),radians(180))
+      arc(200,270,199,55,radians(0),radians(180))
+      arc(200,285,192,60,radians(5),radians(175))
+    }
+  }
 
 let emojiArray = ['🍎', '🍊', '🍓', '🍎', '🍊', '🍓', '🍋', '🍉', '🥭', '🥝', '🍌', '🫐', '💣', '💔', '☹️', '😡', '👎'];

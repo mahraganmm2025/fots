@@ -1,10 +1,9 @@
 let dora;
 
-
 function setup() {
   // createCanvas(w, h)
   createCanvas(555, 680)
-  dora = new Dora(20, 350)
+  //dora = new Dora(20, 350);
 
 }
 
