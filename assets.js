@@ -118,6 +118,40 @@ function drawCanadiantire() {
   fill(0)
 }
 
+class TimHortonsCookie {
+  constructor(x, y, s = 1) {
+    this.x = x;
+    this.y = y;
+    this.s = s;
+  }
+  draw() {
+    push()
+    translate(this.x, this.y); // to move the whole character
+    scale(this.s); // apply scale from the constructor
+    fill(230, 166, 103)
+    ellipse(200, 200, 300)
+
+    fill(33, 22, 12)
+    ellipse(200, 200, 50)
+    ellipse(300, 200, 30)
+    ellipse(240, 140, 30)
+    ellipse(100, 130, 40)
+    ellipse(100, 250, 65)
+    ellipse(157, 111, 30)
+    ellipse(210, 300, 70)
+    rect(270, 250, 40)
+    rect(120, 170, 45)
+    rect(244, 80, 25)
+    textSize(20);
+    pop()
+  }
+
+  move(dx, dy) {
+    this.x += dx;
+    this.y += dy;
+  }
+}
+
 class Dora {
   constructor(x, y, s = 1) {
     this.x = x;
@@ -191,69 +225,17 @@ class Dora {
     stroke(0)
     fill(0)
     text("Dora", 255, 175)
-
-    // basket
-    push()
-    noStroke()
-    //outer basket
-    fill(99,70,51)
-    rect(100,200,200,75)
-    arc(200,275,200,100,radians(0),radians(180))
-
-
-    //inner basket/rim
-    fill(56, 41, 31)
-    stroke(84, 60, 44)
-    strokeWeight(13)
-    ellipse(200,200,200,30)
-
-    //handle
-    noFill()
-    stroke(89, 67, 52)
-    strokeWeight(8)
-
-    push()
-    rotate(-0.5)
-    arc(6,230,25,100,radians(180),radians(-45))
-    pop()
-
-
-    push()
-    rotate(0.5)
-    arc(345,40,25,100,radians(216),radians(-10))
-    pop()
-
-    //basket lining
-    strokeWeight(1)
-    stroke(84, 60, 45)
-    noFill()
-    arc(200,210,199,35,radians(0),radians(180))
-    arc(200,225,199,40,radians(0),radians(180))
-    arc(200,240,199,45,radians(0),radians(180))
-    arc(200,255,199,50,radians(0),radians(180))
-    arc(200,270,199,55,radians(0),radians(180))
-    arc(200,285,192,60,radians(5),radians(175))
-    pop()
-
-    // left arm
-    push()
-    fill(255, 255, 255)
-    beginShape()
-    vertex(225, 123)
-    vertex(175, 180)
-    vertex(195, 180)
-    vertex(225, 145)
-    vertex(225, 123)
-    endShape()
-    pop()
-
-    pop()
-
   }
-  move(dx, dy) {
-    this.x += dx;//x = x + 1
-    this.y += dy;
+
+  move(dx) {
+    if (keyIsDown(LEFT_ARROW) && this.x >= -250) {
+      this.x -= dx
+    }
+    if (keyIsDown(RIGHT_ARROW) && this.x <= 250) {
+      this.x += dx
+    }
   }
+
 }
 
 function drawAlex() {
@@ -268,56 +250,77 @@ function drawAlex() {
   text("(" + mouseX + "," + mouseY + " )", mouseX, mouseY);
 }
 
-class Basket{
+class Basket {
   constructor(x, y, s = 1) {
     this.x = x;
     this.y = y;
     this.s = s;
   }
-    draw(){
-      push()
-      translate(this.x, this.y); // to move the whole character
-      scale(this.s);
-      noStroke()
-      //outer basket
-      fill(99,70,51)
-      rect(100,200,200,75)
-      arc(200,275,200,100,radians(0),radians(180))
+  draw() {
+    push()
+    translate(this.x, this.y); // to move the whole character
+    scale(this.s);
+    noStroke()
+    //outer basket
+    fill(99, 70, 51)
+    rect(100, 200, 200, 75)
+    arc(200, 275, 200, 100, radians(0), radians(180))
 
 
-      //inner basket/rim
-      fill(56, 41, 31)
-      stroke(84, 60, 44)
-      strokeWeight(13)
-      ellipse(200,200,200,30)
+    //inner basket/rim
+    fill(56, 41, 31)
+    stroke(84, 60, 44)
+    strokeWeight(13)
+    ellipse(200, 200, 200, 30)
 
-      //handle
-      noFill()
-      stroke(89, 67, 52)
-      strokeWeight(8)
+    //handle
+    noFill()
+    stroke(89, 67, 52)
+    strokeWeight(8)
 
-      push()
-      rotate(-0.5)
-      arc(6,230,25,100,radians(180),radians(-45))
-      pop()
+    push()
+    rotate(-0.5)
+    arc(6, 230, 25, 100, radians(180), radians(-45))
+    pop()
 
 
-      push()
-      rotate(0.5)
-      arc(345,40,25,100,radians(216),radians(-10))
-      pop()
+    push()
+    rotate(0.5)
+    arc(345, 40, 25, 100, radians(216), radians(-10))
+    pop()
 
-      //basket lining
-      strokeWeight(1)
-      stroke(84, 60, 45)
-      noFill()
-      arc(200,210,199,35,radians(0),radians(180))
-      arc(200,225,199,40,radians(0),radians(180))
-      arc(200,240,199,45,radians(0),radians(180))
-      arc(200,255,199,50,radians(0),radians(180))
-      arc(200,270,199,55,radians(0),radians(180))
-      arc(200,285,192,60,radians(5),radians(175))
-    }
+    //basket lining
+    strokeWeight(1)
+    stroke(84, 60, 45)
+    noFill()
+    arc(200, 210, 199, 35, radians(0), radians(180))
+    arc(200, 225, 199, 40, radians(0), radians(180))
+    arc(200, 240, 199, 45, radians(0), radians(180))
+    arc(200, 255, 199, 50, radians(0), radians(180))
+    arc(200, 270, 199, 55, radians(0), radians(180))
+    arc(200, 285, 192, 60, radians(5), radians(175))
   }
+
+  move(dx) {
+    if (keyIsDown(LEFT_ARROW) && this.x >= -250) {
+      this.x += dx
+    }
+    if (keyIsDown(RIGHT_ARROW) && this.x <= 250) {
+      this.x -= dx
+    }
+
+  }
+
+  // ctrlChar() {
+  //  if (keyIsDown(LEFT_ARROW) && this.x >= -250) {
+  //    this.move(-10, 0);
+  //  }
+  //  if (keyIsDown(RIGHT_ARROW) && this.x <= 250) {
+  //    this.move(10, 0);
+  //  }
+  // }
+
+}
+
 
 let emojiArray = ['🍎', '🍊', '🍓', '🍎', '🍊', '🍓', '🍋', '🍉', '🥭', '🥝', '🍌', '🫐', '💣', '💔', '☹️', '😡', '👎'];
