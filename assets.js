@@ -373,3 +373,29 @@ class Title {
   }
 }
 let emojiArray = ['🍎', '🍊', '🍓', '🍎', '🍊', '🍓', '🍋', '🍉', '🥭', '🥝', '🍌', '🫐', '💣', '💔', '☹️', '😡', '👎'];
+
+class FallingEmoji {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.emoji = random(emojiArray);
+    this.speed = random(1, 5); // Different falling speeds
+    this.size = random(20, 40);
+  }
+  
+  draw() {
+    push();
+    textAlign(CENTER, CENTER);
+    textSize(this.size);
+    text(this.emoji, this.x, this.y);
+    pop();
+  }
+  
+  update() {
+    this.y += this.speed;
+  }
+  
+  isOffScreen() {
+    return this.y > height + this.size;
+  }
+}

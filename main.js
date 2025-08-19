@@ -7,6 +7,8 @@ let titleFont;
 let title
 let usernameField, passwordField, signInBtn;
 let userTable;
+let fallingEmojis = [];
+let lastEmojiSpawn = 0;
 
 function preload() {
   tree = loadImage('mahraganTree.png'); 
@@ -101,6 +103,24 @@ function draw() {
   if(screen == "game"){
     image(tree, 0, 0, 550, 775)
     image(grass, 0, 400, 650, 200)
+    
+    // Spawn falling emojis
+    if (millis() - lastEmojiSpawn > random(500, 2000)) {
+      fallingEmojis.push(new FallingEmoji(random(50, width - 50), -50));
+      lastEmojiSpawn = millis();
+    }
+    
+    // Update and draw falling emojis
+    for (let i = fallingEmojis.length - 1; i >= 0; i--) {
+      fallingEmojis[i].update();
+      fallingEmojis[i].draw();
+      
+      // Remove emojis that are off screen
+      if (fallingEmojis[i].isOffScreen()) {
+        fallingEmojis.splice(i, 1);
+      }
+    }
+    
     dora.draw();
     ctrlChar();
     basket.draw();
