@@ -1,45 +1,67 @@
-function drawAngelina() {
-  push()
-  fill(255)
-  beginShape()
-  vertex(250, 123)
-  vertex(200, 180)
-  vertex(220, 180)
-  vertex(250, 145)
-  vertex(250, 123)
-  endShape()
+class ANGELINA_CH {
+  constructor(x, y, s = 1) {
+    this.x = x;
+    this.y = y;
+    this.s = s;
+  }
+  draw() {
+    push()
 
-  beginShape()
-  vertex(285, 130)
-  vertex(330, 180)
-  vertex(350, 180)
-  vertex(300, 123)
-  vertex(285, 130)
-  endShape()
+    translate(this.x, this.y); // to move the whole character
+    scale(this.s);
 
-  push()
-  fill(41, 28, 19)
-  arc(275, 70, 80, 100, radians(180), radians(0))
-  rect(235, 70, 80, 25)
-  pop()
+    push()
+    fill(255)
+    beginShape()
+    vertex(250, 123)
+    vertex(200, 180)
+    vertex(220, 180)
+    vertex(250, 145)
+    vertex(250, 123)
+    endShape()
 
-  rect(250, 50, 50, 50)
-  rect(262.5, 100, 25, 15)
-  // body
-  arc(275, 277, 100, 335, radians(180), radians(0))
-  // legs
-  push()
-  fill(41, 28, 19)
-  rect(255, 45, 40, 10)
-  pop()
-  line(265, 60, 265, 70)
-  line(285, 60, 285, 70)
-  arc(5, 2, 6, 20, radians(0), radians(180))
+    beginShape()
+    vertex(285, 130)
+    vertex(330, 180)
+    vertex(350, 180)
+    vertex(300, 123)
+    vertex(285, 130)
+    endShape()
 
-  stroke(0)
-  fill(0)
-  text("St. Mary (in progress)", 255, 400)
-  pop()
+    push()
+    fill(41, 28, 19)
+    arc(275, 70, 80, 100, radians(180), radians(0))
+    rect(235, 70, 80, 25)
+    pop()
+
+    rect(250, 50, 50, 50)
+    rect(262.5, 100, 25, 15)
+    // body
+    // arc(275, 277, 100, 335, radians(180), radians(0))
+    ellipse(275, 185, 100, 158)
+    // legs
+    push()
+    fill(41, 28, 19)
+    rect(255, 45, 40, 10)
+    pop()
+    line(265, 60, 265, 70)
+    line(285, 60, 285, 70)
+
+    stroke(0)
+    fill(0)
+    text("St. Mary (in progress)", 255, 400)
+    pop()
+
+    pop()
+  }
+  move(dx) {
+    if (keyIsDown(LEFT_ARROW) && this.x >= -140) {
+      this.x -= dx
+    }
+    if (keyIsDown(RIGHT_ARROW) && this.x <= 370) {
+      this.x += dx
+    }
+  }
 }
 
 function drawRaul() {
@@ -153,7 +175,7 @@ class TimHortonsCookie {
 }
 
 class Dora {
-  constructor(x, y, s = 1) {
+  constructor(x, y, s = 0.8) {
     this.x = x;
     this.y = y;
     this.s = s;
@@ -168,19 +190,19 @@ class Dora {
     // left arm
     beginShape()
     vertex(225, 123)
-    vertex(175, 180)
-    vertex(195, 180)
-    vertex(225, 145)
+    vertex(225, 0)
+    vertex(242, 0)
+    vertex(242, 123)
     vertex(225, 123)
     endShape()
 
     // right arm
     beginShape()
-    vertex(310, 130)
-    vertex(355, 180)
-    vertex(375, 180)
+    vertex(307, 130)
+    vertex(307, 0)
+    vertex(325, 0)
     vertex(325, 123)
-    vertex(310, 130)
+    vertex(305, 130)
     endShape()
 
     // hair
@@ -225,13 +247,14 @@ class Dora {
     stroke(0)
     fill(0)
     text("Dora", 255, 175)
+    pop()
   }
 
   move(dx) {
-    if (keyIsDown(LEFT_ARROW) && this.x >= -250) {
+    if (keyIsDown(LEFT_ARROW) && this.x >= -188) {
       this.x -= dx
     }
-    if (keyIsDown(RIGHT_ARROW) && this.x <= 250) {
+    if (keyIsDown(RIGHT_ARROW) && this.x <= 300) {
       this.x += dx
     }
   }
@@ -251,7 +274,7 @@ function drawAlex() {
 }
 
 class Basket {
-  constructor(x, y, s = 1) {
+  constructor(x, y, s = 0.5) {
     this.x = x;
     this.y = y;
     this.s = s;
@@ -302,25 +325,51 @@ class Basket {
   }
 
   move(dx) {
-    if (keyIsDown(LEFT_ARROW) && this.x >= -250) {
-      this.x += dx
-    }
-    if (keyIsDown(RIGHT_ARROW) && this.x <= 250) {
+    if (keyIsDown(LEFT_ARROW) && this.x >= -70) {
       this.x -= dx
     }
-
+    if (keyIsDown(RIGHT_ARROW) && this.x <= 420) {
+      this.x += dx
+    }
   }
-
-  // ctrlChar() {
-  //  if (keyIsDown(LEFT_ARROW) && this.x >= -250) {
-  //    this.move(-10, 0);
-  //  }
-  //  if (keyIsDown(RIGHT_ARROW) && this.x <= 250) {
-  //    this.move(10, 0);
-  //  }
-  // }
+  ctrlChar() {
+    this.move(10);
+  }
 
 }
 
+class Title {
+  timer = 0
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  draw() {
+    this.timer++
+    push()
+    translate(this.x, this.y); // to move the whole character
+    textAlign(CENTER)
+    textFont(titleFont)
+    textSize(25)
+    fill(191, 64, 191)
+    stroke(0)
+    strokeWeight(2)
 
+    if (this.timer < 60) {
+      this.y += 0.5
+    }
+    if (this.timer >= 60 && this.timer < 120) {
+      this.y -= 0.5
+    }
+    if (this.timer >= 120) {
+      this.timer = 0
+    }
+    if (this.y < 0) {
+      this.y = 0
+    }
+
+    text("Fruits of the Spirit", width / 2, 100)
+    pop()
+  }
+}
 let emojiArray = ['🍎', '🍊', '🍓', '🍎', '🍊', '🍓', '🍋', '🍉', '🥭', '🥝', '🍌', '🫐', '💣', '💔', '☹️', '😡', '👎'];

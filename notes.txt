@@ -32,3 +32,7 @@ Schedule:
 - Scoring (online)
 - Appify (us)
 - put limits on where she can go
+
+- based on username, if statement to initialize corresponding char
+- would anew user get dora default? or choose one of the avatars?
+- add minion char to char selections
