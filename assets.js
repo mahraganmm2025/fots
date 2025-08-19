@@ -398,4 +398,18 @@ class FallingEmoji {
   isOffScreen() {
     return this.y > height + this.size;
   }
+  
+  checkCollision(basket) {
+    // Calculate basket boundaries (accounting for scale and translation)
+    const basketLeft = basket.x + (100 * basket.s);
+    const basketRight = basket.x + (300 * basket.s);
+    const basketTop = basket.y + (200 * basket.s);
+    const basketBottom = basket.y + (275 * basket.s);
+    
+    // Check if emoji overlaps with basket
+    return this.x > basketLeft && 
+           this.x < basketRight && 
+           this.y + this.size/2 > basketTop && 
+           this.y - this.size/2 < basketBottom;
+  }
 }

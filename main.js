@@ -115,6 +115,12 @@ function draw() {
       fallingEmojis[i].update();
       fallingEmojis[i].draw();
       
+      // Check collision with basket
+      if (fallingEmojis[i].checkCollision(basket)) {
+        fallingEmojis.splice(i, 1);
+        continue;
+      }
+      
       // Remove emojis that are off screen
       if (fallingEmojis[i].isOffScreen()) {
         fallingEmojis.splice(i, 1);
