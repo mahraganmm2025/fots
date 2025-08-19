@@ -406,11 +406,10 @@ class FallingEmoji {
     const basketTop = basket.y + (200 * basket.s);
     const basketBottom = basket.y + (275 * basket.s);
     
-    // Check if emoji overlaps with basket AND is coming from above
+    // Check if emoji overlaps with basket
     return this.x > basketLeft && 
            this.x < basketRight && 
-           this.y > basketTop && 
-           this.y < basketBottom &&
-           this.speed > 0; // Only count if falling down
+           this.y + this.size/2 > basketTop && 
+           this.y - this.size/2 < basketBottom;
   }
 }
