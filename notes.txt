@@ -36,3 +36,16 @@ Schedule:
 - based on username, if statement to initialize corresponding char
 - would anew user get dora default? or choose one of the avatars?
 - add minion char to char selections
+
+
+screens
+
+- title
+- sign up -> welcome user: play or leaderboard -> game or leaderboard
+- sign in -> welcome user: play or leaderboard -> game or leaderboard
+- quick start -> welcome: play or leaderboard -> game or leaderboard
+
+https://chatgpt.com/c/6856df93-8aac-8001-8d61-4d51cea32e5a
+
+https://chatgpt.com/share/68ad11ab-db28-8001-8456-1f4328508064
+https://fots-game.netlify.app/

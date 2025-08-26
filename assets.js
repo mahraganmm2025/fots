@@ -281,6 +281,7 @@ class Basket {
   }
   draw() {
     push()
+    push()
     translate(this.x, this.y); // to move the whole character
     scale(this.s);
     noStroke()
@@ -322,6 +323,7 @@ class Basket {
     arc(200, 255, 199, 50, radians(0), radians(180))
     arc(200, 270, 199, 55, radians(0), radians(180))
     arc(200, 285, 192, 60, radians(5), radians(175))
+    pop()
   }
 
   move(dx) {
@@ -372,6 +374,7 @@ class Title {
     pop()
   }
 }
+
 let emojiArray = ['🍎', '🍊', '🍓', '🍎', '🍊', '🍓', '🍋', '🍉', '🥭', '🥝', '🍌', '🫐', '💣', '💔', '☹️', '😡', '👎'];
 
 class FallingEmoji {
@@ -380,9 +383,11 @@ class FallingEmoji {
     this.y = y;
     this.emoji = random(emojiArray);
     this.speed = random(1, 5); // Different falling speeds
-    this.size = random(20, 40);
+    // Define allowed sizes and select one randomly
+    const sizes = [20, 30, 40]; // Only three different sizes
+    this.size = random(sizes); // Selects a size from the sizes array
   }
-  
+
   draw() {
     push();
     textAlign(CENTER, CENTER);
@@ -390,28 +395,28 @@ class FallingEmoji {
     text(this.emoji, this.x, this.y);
     pop();
   }
-  
+
   update() {
     this.y += this.speed;
   }
-  
+
   isOffScreen() {
     return this.y > height + this.size;
   }
-  
+
   checkCollision(basket) {
     // Calculate basket boundaries (accounting for scale and translation)
     const basketLeft = basket.x + (100 * basket.s);
     const basketRight = basket.x + (300 * basket.s);
-    const basketTop = basket.y + (200 * basket.s);
+    const basketTop = basket.y + (200 * basket.s)-10;
     const basketBottom = basket.y + (275 * basket.s);
-    
+
     // Check if emoji is horizontally within basket bounds
     const withinHorizontalBounds = this.x > basketLeft && this.x < basketRight;
-    
+
     // Check if emoji is just crossing the top edge of the basket (coming from above)
-    const crossingTopEdge = this.y >= basketTop && this.y <= basketTop + this.size/2;
-    
+    const crossingTopEdge = this.y >= basketTop && this.y <= basketTop + this.size / 2;
+
     // Only count as collision if falling from above into the basket opening
     return withinHorizontalBounds && crossingTopEdge && this.speed > 0;
   }
