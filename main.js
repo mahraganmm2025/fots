@@ -109,6 +109,25 @@ function draw() {
 
     //draw title
     title.draw();
+
+    //draw play button
+    fill(50, 205, 50)
+    if (mouseX >= 228 && mouseX <= 328 && mouseY >= 322 && mouseY <= 372 && screen == "start"){
+      fill(34, 139, 34);
+    }
+    rect(width / 2, 345, 200, 50)
+    fill(0)
+    text("Play", width / 2, 350)
+
+    //draw leaderboard button
+    fill(50, 205, 50)
+    if (mouseX >= 228 && mouseX <= 328 && mouseY >= 247 && mouseY <= 297 && screen == "start"){
+      fill(34, 139, 34);
+    }
+    rect(width / 2, 270, 200, 50)
+    fill(0)
+    text("Leaderboard", width / 2, 275)
+    pop()
   }
   if (screen == "game") {
     image(tree, 0, 0, 550, 775)
@@ -193,6 +212,8 @@ function mousePressed() {
   if (mouseX >= 328 && mouseX <= 428 && mouseY >= 227 && mouseY <= 277 && screen == "title") screen = "sign in";
   if (mouseX >= 128 && mouseX <= 228 && mouseY >= 227 && mouseY <= 277 && screen == "title") screen = "sign up";
   if (mouseX >= 228 && mouseX <= 328 && mouseY >= 302 && mouseY <= 352 && screen == "title") screen = "start";
+  if (mouseX >= 228 && mouseX <= 328 && mouseY >= 247 && mouseY <= 297 && screen == "start") screen = "leaderboard";
+  if (mouseX >= 228 && mouseX <= 328 && mouseY >= 322 && mouseY <= 372 && screen == "start") screen = "game";
 
   if (screen === "sign up") {
     usernameField.focused = usernameField.hit(mouseX, mouseY);
@@ -327,4 +348,28 @@ function submit() {
 
   saveTable(userTable, 'users.csv');    // downloads CSV (client-side)
   screen = "start";
+}
+
+async function signup(username, password) {
+  let res = await fetch("/.netlify/functions/signup", {
+    method: "POST",
+    body: JSON.stringify({ username, password })
+  });
+  return await res.json();
+}
+
+async function login(username, password) {
+  let res = await fetch("/.netlify/functions/login", {
+    method: "POST",
+    body: JSON.stringify({ username, password })
+  });
+  return await res.json();
+}
+
+async function saveScore(username, score) {
+  let res = await fetch("/.netlify/functions/saveScore", {
+    method: "POST",
+    body: JSON.stringify({ username, score })
+  });
+  return await res.json();
 }
