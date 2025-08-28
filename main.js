@@ -4,7 +4,7 @@ let screen = "title";
 let tree;
 let grass;
 let titleFont;
-let title
+let title;
 let usernameField, passwordField, signInBtn;
 let userTable;
 let fallingEmojis = [];
@@ -12,9 +12,9 @@ let lastEmojiSpawn = 0;
 let score = 0;
 
 function preload() {
-  tree = loadImage('mahraganTree.png');
-  grass = loadImage('mahraganGrass.png');
-  titleFont = loadFont('Assets/PressStart2P-Regular.ttf');
+  tree = loadImage("mahraganTree.png");
+  grass = loadImage("mahraganGrass.png");
+  titleFont = loadFont("Assets/PressStart2P-Regular.ttf");
 }
 
 function setup() {
@@ -23,9 +23,9 @@ function setup() {
   dora = new Dora(0, 420);
   basket = new Basket(118, 280);
   userTable = new p5.Table();
-  userTable.addColumn('username');
-  userTable.addColumn('password');   // ⚠️ plain text; see note below
-  userTable.addColumn('highscore');
+  userTable.addColumn("username");
+  userTable.addColumn("password"); // ⚠️ plain text; see note below
+  userTable.addColumn("highscore");
 
   // centered-ish boxes that fit canvas
   usernameField = new TextField(120, 220, 320, 44, false, titleFont);
@@ -34,110 +34,186 @@ function setup() {
 }
 
 function draw() {
-  background(107, 218, 248)
+  background(107, 218, 248);
 
   if (screen == "title") {
-    push()
-    rectMode(CENTER)
-    textAlign(CENTER)
-    textFont(titleFont)
+    push();
+    rectMode(CENTER);
+    textAlign(CENTER);
+    textFont(titleFont);
 
     //draw title
-    title.draw();
+    title.drawTitle();
 
     //draw sign in button
-    fill(50, 205, 50)
-    if (mouseX >= 328 && mouseX <= 428 && mouseY >= 227 && mouseY <= 277 && screen == "title") {
+    fill(50, 205, 50);
+    if (
+      mouseX >= 328 &&
+      mouseX <= 428 &&
+      mouseY >= 227 &&
+      mouseY <= 277 &&
+      screen == "title"
+    ) {
       fill(34, 139, 34);
     }
-    rect(width / 2 + 100, 250, 100, 50)
-    fill(0)
+    rect(width / 2 + 100, 250, 100, 50);
+    fill(0);
 
-    text("Sign in", width / 2 + 100, 255)
+    text("Sign in", width / 2 + 100, 255);
 
     //draw sign up button
-    fill(50, 205, 50)
-    if (mouseX >= 128 && mouseX <= 228 && mouseY >= 227 && mouseY <= 277 && screen == "title") {
+    fill(50, 205, 50);
+    if (
+      mouseX >= 128 &&
+      mouseX <= 228 &&
+      mouseY >= 227 &&
+      mouseY <= 277 &&
+      screen == "title"
+    ) {
       fill(34, 139, 34);
     }
-    rect(width / 2 - 100, 250, 100, 50)
-    fill(0)
-    text("Sign up", width / 2 - 100, 255)
+    rect(width / 2 - 100, 250, 100, 50);
+    fill(0);
+    text("Sign up", width / 2 - 100, 255);
 
     //draw skip button
-    fill(50, 205, 50)
-    if (mouseX >= 228 && mouseX <= 328 && mouseY >= 302 && mouseY <= 352 && screen == "title") {
+    fill(50, 205, 50);
+    if (
+      mouseX >= 228 &&
+      mouseX <= 328 &&
+      mouseY >= 302 &&
+      mouseY <= 352 &&
+      screen == "title"
+    ) {
       fill(34, 139, 34);
     }
-    rect(width / 2, 325, 100, 50)
-    fill(0)
-    text("Skip", width / 2, 330)
-    pop()
+    rect(width / 2, 325, 100, 50);
+    fill(0);
+    text("Skip", width / 2, 330);
+    pop();
   }
   if (screen == "sign up") {
-    push()
-    rectMode(CENTER)
-    textAlign(CENTER)
-    textFont(titleFont)
-    textSize(35)
-    fill(191, 64, 191)
-    stroke(0)
-    strokeWeight(2)
+    push();
+    rectMode(CENTER);
+    textAlign(CENTER);
+    textFont(titleFont);
+    textSize(35);
+    fill(191, 64, 191);
+    stroke(0);
+    strokeWeight(2);
     //title
-    text("Sign up", width / 2, 75)
+    text("Sign up", width / 2, 75);
 
-    //username
-    strokeWeight(1)
-    fill(191, 64, 191); noStroke(); textAlign(LEFT, CENTER); textSize(38);
-    strokeWeight(2)
+    //username and password text
+    strokeWeight(1);
+    fill(191, 64, 191);
+    noStroke();
+    textAlign(LEFT, CENTER);
+    textSize(38);
+    strokeWeight(2);
     text("Username", 123, 190);
     text("Password", 123, 315);
 
     // input boxes
     usernameField.draw();
     passwordField.draw();
-    textSize(15)
+    textSize(15);
     signInBtn.draw();
 
-    pop()
+    //draw back button
+    stroke(0);
+    strokeWeight(3);
+    fill(153);
+    if (
+      mouseX >= 26 &&
+      mouseX <= 126 &&
+      mouseY >= 27 &&
+      mouseY <= 77 &&
+      screen == "sign up"
+    )
+      fill(100);
+    rect(75, 50, 100, 50, 3);
+    fill(0);
+    strokeWeight(1);
+    text("Back", 45, 50);
+    pop();
   }
   if (screen == "start") {
-    push()
-    rectMode(CENTER)
-    textAlign(CENTER)
-    textFont(titleFont)
+    push();
+    rectMode(CENTER);
+    textAlign(CENTER);
+    textFont(titleFont);
 
     //draw title
-    title.draw();
+    title.drawTitle();
 
     //draw play button
-    fill(50, 205, 50)
-    if (mouseX >= 228 && mouseX <= 328 && mouseY >= 322 && mouseY <= 372 && screen == "start"){
+    fill(50, 205, 50);
+    if (
+      mouseX >= 228 &&
+      mouseX <= 328 &&
+      mouseY >= 322 &&
+      mouseY <= 372 &&
+      screen == "start"
+    ) {
       fill(34, 139, 34);
     }
-    rect(width / 2, 345, 200, 50)
-    fill(0)
-    text("Play", width / 2, 350)
+    rect(width / 2, 345, 200, 50);
+    fill(0);
+    text("Play", width / 2, 350);
 
     //draw leaderboard button
-    fill(50, 205, 50)
-    if (mouseX >= 228 && mouseX <= 328 && mouseY >= 247 && mouseY <= 297 && screen == "start"){
+    fill(50, 205, 50);
+    if (
+      mouseX >= 228 &&
+      mouseX <= 328 &&
+      mouseY >= 247 &&
+      mouseY <= 297 &&
+      screen == "start"
+    ) {
       fill(34, 139, 34);
     }
-    rect(width / 2, 270, 200, 50)
-    fill(0)
-    text("Leaderboard", width / 2, 275)
-    pop()
+    rect(width / 2, 270, 200, 50);
+    fill(0);
+    text("Leaderboard", width / 2, 275);
+    pop();
+  }
+  if (screen == "leaderboard"){
+    push();
+    rectMode(CENTER);
+    textAlign(CENTER);
+    textFont(titleFont);
+    title.drawLeaderboard();
+    
+    push()
+     //draw back button
+      stroke(0);
+      strokeWeight(3);
+      fill(153);
+      if (
+        mouseX >= 26 &&
+        mouseX <= 126 &&
+        mouseY >= 27 &&
+        mouseY <= 77 &&
+        screen == "leaderboard"
+      )
+        fill(100);
+      rect(75, 50, 100, 50, 3);
+      fill(0);
+      strokeWeight(1);
+      textAlign(LEFT);
+      text("Back", 45, 50);
+      pop();
   }
   if (screen == "game") {
-    image(tree, 0, 0, 550, 775)
-    image(grass, 0, 400, 650, 200)
+    image(tree, 0, 0, 550, 775);
+    image(grass, 0, 400, 650, 200);
 
     //draw person
     dora.draw();
     ctrlChar();
     basket.draw();
-    basket.ctrlChar()
+    basket.ctrlChar();
 
     // Spawn falling emojis
     if (millis() - lastEmojiSpawn > random(500, 2000)) {
@@ -152,26 +228,27 @@ function draw() {
 
       // Check collision with basket
       if (fallingEmojis[i].checkCollision(basket)) {
-        print(fallingEmojis)
-        if (fallingEmojis[i].emoji == '💣' || fallingEmojis[i].emoji == '💔' || fallingEmojis[i].emoji == '☹️' || fallingEmojis[i].emoji == '😡' || fallingEmojis[i] == '👎') {
+        print(fallingEmojis);
+        if (
+          fallingEmojis[i].emoji == "💣" ||
+          fallingEmojis[i].emoji == "💔" ||
+          fallingEmojis[i].emoji == "☹️" ||
+          fallingEmojis[i].emoji == "😡" ||
+          fallingEmojis[i] == "👎"
+        ) {
           if (fallingEmojis[i].size == 20) {
             score -= 30;
-          }
-          else if (fallingEmojis[i].size == 30) {
+          } else if (fallingEmojis[i].size == 30) {
             score -= 20;
-          }
-          else if (fallingEmojis[i].size == 40) {
+          } else if (fallingEmojis[i].size == 40) {
             score -= 10;
           }
-        }
-        else {
+        } else {
           if (fallingEmojis[i].size == 20) {
             score += 30;
-          }
-          else if (fallingEmojis[i].size == 30) {
+          } else if (fallingEmojis[i].size == 30) {
             score += 20;
-          }
-          else if (fallingEmojis[i].size == 40) {
+          } else if (fallingEmojis[i].size == 40) {
             score += 10;
           }
         }
@@ -186,7 +263,6 @@ function draw() {
       }
     }
 
-
     // Display the score on the canvas
     push();
     fill(0);
@@ -197,7 +273,6 @@ function draw() {
     text("Score: " + score, 490, 10); // Display score
     pop();
     push();
-
   }
 
   //text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
@@ -206,18 +281,71 @@ function draw() {
 function ctrlChar() {
   dora.move(10);
 }
-
+function mouseReleased() {
+  if (
+    mouseX >= 228 &&
+    mouseX <= 328 &&
+    mouseY >= 302 &&
+    mouseY <= 352 &&
+    screen == "title"
+  )
+    screen = "start";
+}
 function mousePressed() {
   // menu buttons (yours as-is)
-  if (mouseX >= 328 && mouseX <= 428 && mouseY >= 227 && mouseY <= 277 && screen == "title") screen = "sign in";
-  if (mouseX >= 128 && mouseX <= 228 && mouseY >= 227 && mouseY <= 277 && screen == "title") screen = "sign up";
-  if (mouseX >= 228 && mouseX <= 328 && mouseY >= 302 && mouseY <= 352 && screen == "title") screen = "start";
-  if (mouseX >= 228 && mouseX <= 328 && mouseY >= 247 && mouseY <= 297 && screen == "start") screen = "leaderboard";
-  if (mouseX >= 228 && mouseX <= 328 && mouseY >= 322 && mouseY <= 372 && screen == "start") screen = "game";
+  if (
+    mouseX >= 328 &&
+    mouseX <= 428 &&
+    mouseY >= 227 &&
+    mouseY <= 277 &&
+    screen == "title"
+  )
+    screen = "sign in";
+  if (
+    mouseX >= 128 &&
+    mouseX <= 228 &&
+    mouseY >= 227 &&
+    mouseY <= 277 &&
+    screen == "title"
+  )
+    screen = "sign up";
 
+  if (
+    mouseX >= 228 &&
+    mouseX <= 328 &&
+    mouseY >= 247 &&
+    mouseY <= 297 &&
+    screen == "start"
+  )
+    screen = "leaderboard";
+  if (
+    mouseX >= 228 &&
+    mouseX <= 328 &&
+    mouseY >= 322 &&
+    mouseY <= 372 &&
+    screen == "start"
+  )
+    screen = "game";
+  if (
+    mouseX >= 26 &&
+    mouseX <= 126 &&
+    mouseY >= 27 &&
+    mouseY <= 77 &&
+    screen == "sign up"
+  )
+    screen = "title"
+  if (
+    mouseX >= 26 &&
+    mouseX <= 126 &&
+    mouseY >= 27 &&
+    mouseY <= 77 &&
+    screen == "leaderboard"
+  )
+    screen = "start"
   if (screen === "sign up") {
     usernameField.focused = usernameField.hit(mouseX, mouseY);
-    passwordField.focused = !usernameField.focused && passwordField.hit(mouseX, mouseY);
+    passwordField.focused =
+      !usernameField.focused && passwordField.hit(mouseX, mouseY);
     if (signInBtn.hit(mouseX, mouseY)) submit();
   }
 }
@@ -243,7 +371,10 @@ function keyTyped() {
 }
 class TextField {
   constructor(x, y, w, h, isPassword = false, font = null) {
-    this.x = x; this.y = y; this.w = w; this.h = h;
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
     this.isPassword = isPassword;
     this.font = font;
     this.value = "";
@@ -258,10 +389,14 @@ class TextField {
   draw() {
     push();
     rectMode(CORNER);
-    stroke(0); strokeWeight(3); fill(255);
+    stroke(0);
+    strokeWeight(3);
+    fill(255);
     rect(this.x, this.y, this.w, this.h);
 
-    noStroke(); fill(0); textAlign(LEFT, CENTER);
+    noStroke();
+    fill(0);
+    textAlign(LEFT, CENTER);
     if (this.font) textFont(this.font);
     textSize(this.textSizePx);
 
@@ -278,7 +413,8 @@ class TextField {
       }
       if (this.caretVisible) {
         const tw = textWidth(shown);
-        stroke(0); strokeWeight(2);
+        stroke(0);
+        strokeWeight(2);
         line(tx + tw + 2, this.y + 6, tx + tw + 2, this.y + this.h - 6);
       }
     }
@@ -286,7 +422,12 @@ class TextField {
   }
 
   hit(mx, my) {
-    return mx >= this.x && mx <= this.x + this.w && my >= this.y && my <= this.y + this.h;
+    return (
+      mx >= this.x &&
+      mx <= this.x + this.w &&
+      my >= this.y &&
+      my <= this.y + this.h
+    );
   }
 
   onType(k) {
@@ -303,7 +444,7 @@ class TextField {
     const fits = textWidth(shownNext) <= innerW;
     pop();
 
-    if (fits) this.value = next;   // only accept if it fits
+    if (fits) this.value = next; // only accept if it fits
   }
 
   onSpecialKey(code) {
@@ -312,22 +453,32 @@ class TextField {
 }
 class Button {
   constructor(x, y, w, h, label) {
-    this.x = x; this.y = y; this.w = w; this.h = h; this.label = label;
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.label = label;
     this.normal = color(50, 205, 50);
     this.hover = color(34, 139, 34);
   }
   draw() {
     push();
     rectMode(CORNER);
-    stroke(0); strokeWeight(3);
+    stroke(0);
+    strokeWeight(3);
     fill(this.hit(mouseX, mouseY) ? this.hover : this.normal);
     rect(this.x, this.y, this.w, this.h, 8);
-    noStroke(); fill(0); textAlign(CENTER, CENTER); textSize(20);
+    noStroke();
+    fill(0);
+    textAlign(CENTER, CENTER);
+    textSize(20);
     text(this.label, this.x + this.w / 2, this.y + this.h / 2 + 1);
     pop();
   }
   hit(mx, my) {
-    return mx > this.x && mx < this.x + this.w && my > this.y && my < this.y + this.h;
+    return (
+      mx > this.x && mx < this.x + this.w && my > this.y && my < this.y + this.h
+    );
   }
 }
 
@@ -342,18 +493,18 @@ function submit() {
   }
 
   const row = userTable.addRow();
-  row.setString('username', username);  // <- match lowercase
-  row.setString('password', password);  // <- match lowercase
-  row.setNum('highscore', highscore);   // <- match lowercase
+  row.setString("username", username); // <- match lowercase
+  row.setString("password", password); // <- match lowercase
+  row.setNum("highscore", highscore); // <- match lowercase
 
-  saveTable(userTable, 'users.csv');    // downloads CSV (client-side)
+  // saveTable(userTable, 'users.csv');    // downloads CSV (client-side)
   screen = "start";
 }
 
 async function signup(username, password) {
   let res = await fetch("/.netlify/functions/signup", {
     method: "POST",
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ username, password }),
   });
   return await res.json();
 }
@@ -361,7 +512,7 @@ async function signup(username, password) {
 async function login(username, password) {
   let res = await fetch("/.netlify/functions/login", {
     method: "POST",
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ username, password }),
   });
   return await res.json();
 }
@@ -369,7 +520,7 @@ async function login(username, password) {
 async function saveScore(username, score) {
   let res = await fetch("/.netlify/functions/saveScore", {
     method: "POST",
-    body: JSON.stringify({ username, score })
+    body: JSON.stringify({ username, score }),
   });
   return await res.json();
 }
