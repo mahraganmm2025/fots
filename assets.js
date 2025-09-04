@@ -6,8 +6,12 @@ class ANGELINA_CH {
   }
   draw() {
     push();
-
-    translate(this.x, this.y); // to move the whole character
+    if(screen == "game"){
+      translate(this.x, this.y); // to move the whole character
+    }
+    else{
+      translate(0, 400);
+    }
     scale(this.s);
 
     push();
@@ -47,105 +51,140 @@ class ANGELINA_CH {
     line(265, 60, 265, 70);
     line(285, 60, 285, 70);
 
-    stroke(0);
-    fill(0);
-    text("St. Mary (in progress)", 255, 400);
+    // stroke(0);
+    // fill(0);
+    // text("St. Mary (in progress)", 255, 400);
     pop();
 
+    pop();
+  }
+  move(dx) {
+    if (keyIsDown(LEFT_ARROW) && this.x >= -240) {
+      this.x -= dx;
+    }
+    if (keyIsDown(RIGHT_ARROW) && this.x <= 250) {
+      this.x += dx;
+    }
+  }
+}
+
+class Raul {
+  constructor(x, y, s = 0.85) {
+    this.x = x;
+    this.y = y;
+    this.s = s;
+  }
+  draw() {
+    if(screen == "game"){
+      translate(this.x, this.y); // to move the whole character
+    }
+    else{
+      translate(50, 450);
+    }
+    scale(this.s);
+    // tail
+    push();
+    noFill();
+    stroke(107, 80, 63);
+    strokeWeight(15);
+    arc(120, 265, 75, 50, radians(0), radians(270));
+    pop();
+
+    // legs
+    fill(107, 80, 63);
+    rect(170, 280, 20, 70, 20);
+    rect(210, 280, 20, 70, 20);
+
+    // arms
+    rect(135, 70, 20, 140, 20);
+    rect(245, 70, 20, 140, 20);
+
+    // outside ears and outside bod
+    strokeWeight(1);
+    push();
+    fill(107, 80, 63);
+    ellipse(200, 230, 125, 150);
+    ellipse(150, 100, 50, 50);
+    ellipse(250, 100, 50, 50);
+    pop();
+    // inside ears and inside bod
+    push();
+    fill(196, 178, 167);
+    ellipse(200, 230, 100, 120);
+    ellipse(150, 100, 25, 25);
+    ellipse(250, 100, 25, 25);
+    pop();
+
+    //   face
+    push();
+    fill(107, 80, 63);
+    ellipse(200, 120, 100, 100);
+    pop();
+
+    // inside thing
+    push();
+    noStroke();
+    fill(196, 178, 167);
+    ellipse(185, 115, 50, 50);
+    ellipse(215, 115, 50, 50);
+    ellipse(200, 140, 60, 30);
+    pop();
+
+    // eyes
+    push();
+    fill(255);
+    ellipse(180, 115, 30, 30);
+    ellipse(220, 115, 30, 30);
+    pop();
+    push();
+    fill(0);
+    ellipse(180, 115, 20, 20);
+    ellipse(220, 115, 20, 20);
+    pop();
+    push();
+    fill(107, 80, 63);
+    ellipse(200, 130, 10, 10);
+    pop();
+    push();
+    fill(214, 92, 129);
+    arc(200, 140, 20, 20, radians(0), radians(180));
     pop();
   }
   move(dx) {
     if (keyIsDown(LEFT_ARROW) && this.x >= -140) {
       this.x -= dx;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.x <= 370) {
+    if (keyIsDown(RIGHT_ARROW) && this.x <= 350) {
       this.x += dx;
     }
   }
 }
 
-function drawRaul() {
-  // tail
-  push();
-  noFill();
-  stroke(107, 80, 63);
-  strokeWeight(15);
-  arc(120, 265, 75, 50, radians(0), radians(270));
-  pop();
-
-  // legs
-  fill(107, 80, 63);
-  rect(170, 280, 20, 70, 20);
-  rect(210, 280, 20, 70, 20);
-
-  // arms
-  rect(135, 70, 20, 140, 20);
-  rect(245, 70, 20, 140, 20);
-
-  // outside ears and outside bod
-  strokeWeight(1);
-  push();
-  fill(107, 80, 63);
-  ellipse(200, 230, 125, 150);
-  ellipse(150, 100, 50, 50);
-  ellipse(250, 100, 50, 50);
-  pop();
-  // inside ears and inside bod
-  push();
-  fill(196, 178, 167);
-  ellipse(200, 230, 100, 120);
-  ellipse(150, 100, 25, 25);
-  ellipse(250, 100, 25, 25);
-  pop();
-
-  //   face
-  push();
-  fill(107, 80, 63);
-  ellipse(200, 120, 100, 100);
-  pop();
-
-  // inside thing
-  push();
-  noStroke();
-  fill(196, 178, 167);
-  ellipse(185, 115, 50, 50);
-  ellipse(215, 115, 50, 50);
-  ellipse(200, 140, 60, 30);
-  pop();
-
-  // eyes
-  push();
-  fill(255);
-  ellipse(180, 115, 30, 30);
-  ellipse(220, 115, 30, 30);
-  pop();
-  push();
-  fill(0);
-  ellipse(180, 115, 20, 20);
-  ellipse(220, 115, 20, 20);
-  pop();
-  push();
-  fill(107, 80, 63);
-  ellipse(200, 130, 10, 10);
-  pop();
-  push();
-  fill(214, 92, 129);
-  arc(200, 140, 20, 20, radians(0), radians(180));
-  pop();
-}
-
 class Cat {
-  constructor(x, y, s = 1) {
+  constructor(x, y, s) {
     this.x = x;
     this.y = y;
     this.s = s;
   }
   draw() {
+    if(screen == "game"){
+      scale(0.8)
+      translate(this.x+40, this.y+80); // to move the whole character
+    }
+    else if(screen == "character"){
+      translate(15, 0);
+    }
+    else if(screen == "start"){
+      translate(155, 400);
+      scale(0.8)
+    }
+    
     push();
-    translate(this.x, this.y); // to move the whole character
-    scale(this.s); // apply scale from the constructor
-    push();
+    scale(0.75);
     fill(255);
+
+    push();
+    fill(161, 156, 153);
     beginShape();
     vertex(216, 78);
     vertex(290, 42);
@@ -160,28 +199,85 @@ class Cat {
     vertex(170, 78);
     endShape();
 
+    rect(140, 360, 40, 100, 10);
+    rect(220, 360, 40, 100, 10);
+    pop();
+
+    push();
+    fill(242, 170, 220);
+    beginShape();
+    vertex(108, 59);
+    vertex(146, 75);
+    vertex(115, 100);
+    vertex(108, 59);
+    endShape();
+
+    beginShape();
+    vertex(238, 74);
+    vertex(278, 60);
+    vertex(277, 93);
+    vertex(238, 74);
+    endShape();
+    ellipse(200, 150, 200, 150);
+    pop();
+
+    push();
+    fill(161, 156, 153);
     ellipse(200, 300, 150, 200);
     ellipse(200, 150, 200, 150);
+    push();
+    fill(255);
     ellipse(200, 300, 100, 150);
+    pop();
     ellipse(280, 200, 50, 180);
     ellipse(120, 200, 50, 180);
+    pop();
 
-    line(140, 150, 50, 50);
+    ellipse(160, 130, 40, 40);
+    ellipse(240, 130, 40, 40);
+
+    push();
+    fill(0);
+    ellipse(160, 130, 25, 25);
+    ellipse(240, 130, 25, 25);
+    pop();
+
+    fill(161, 156, 153);
+    arc(194, 166, 20, 30, radians(0), radians(180));
+    arc(215, 166, 20, 30, radians(0), radians(180));
+
+    push();
+    fill(242, 170, 220);
+    ellipse(205, 164, 10, 5);
+    pop();
 
     pop();
   }
-  move(dx, dy) {
-    this.x += dx;
-    this.y += dy;
+  move(dx) {
+    if (keyIsDown(LEFT_ARROW) && this.x >= -150) {
+      this.x -= dx;
+    }
+    if (keyIsDown(RIGHT_ARROW) && this.x <= 460) {
+      this.x += dx;
+    }
   }
 }
 
 function drawCanadiantire() {
   background(220);
   fill(252, 69, 3);
+  // legs
+  rect(150, 260, 15, 60);
+  rect(185, 260, 15, 60);
+
+  // arms
+  rect(120, 130, 15, 90);
+  rect(215, 130, 15, 90);
+
+  fill(237, 120, 52);
   beginShape();
   vertex(100, 191);
-  vertex(188, 300);
+  vertex(175, 300);
   vertex(250, 191);
   vertex(100, 191);
   endShape();
@@ -193,13 +289,13 @@ function drawCanadiantire() {
 
   fill(255);
   textStyle(BOLD);
-  text("CANADIAN", 150, 220);
-  text("TIRE", 170, 235);
+  text("CANADIAN", 140, 220);
+  text("TIRE", 160, 235);
   fill(0);
 }
 
 class TimHortonsCookie {
-  constructor(x, y, s = 1) {
+  constructor(x, y, s) {
     this.x = x;
     this.y = y;
     this.s = s;
@@ -226,9 +322,13 @@ class TimHortonsCookie {
     pop();
   }
 
-  move(dx, dy) {
-    this.x += dx;
-    this.y += dy;
+  move(dx) {
+    if (keyIsDown(LEFT_ARROW) && this.x >= -128) {
+      this.x -= dx;
+    }
+    if (keyIsDown(RIGHT_ARROW) && this.x <= 360) {
+      this.x += dx;
+    }
   }
 }
 
@@ -240,7 +340,12 @@ class Dora {
   }
   draw() {
     push();
-    translate(this.x, this.y); // to move the whole character
+    if(screen == "game"){
+      translate(this.x, this.y); // to move the whole character
+    }
+    else{
+      translate(60, 425);
+    }
     scale(this.s); // apply scale from the constructor
 
     fill(255);
@@ -315,10 +420,14 @@ class Dora {
     if (keyIsDown(RIGHT_ARROW) && this.x <= 300) {
       this.x += dx;
     }
+    if(screen == "gameover"){
+      this.x = 0
+    }
   }
 }
 
 function drawAlex() {
+  background(220);
   fill(236, 240, 201);
   rect(170, 180, 70, 150);
   ellipse(200, 104, 150, 150);
@@ -326,8 +435,9 @@ function drawAlex() {
   ellipse(241, 91, 20, 20);
   stroke(40, 41, 38);
   arc(200, 107, 80, 80, radians(0), radians(180));
-  fill(0);
-  text("(" + mouseX + "," + mouseY + " )", mouseX, mouseY);
+  rect(190, 329, 5, 50);
+  text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
+  rect(211, 329, 5, 50);
 }
 
 class Basket {
@@ -454,6 +564,31 @@ class Title {
     text("Fruits of the Spirit", width / 2, 100);
     pop();
   }
+  drawCharacterTitle() {
+    this.timer++;
+    push();
+    translate(this.x, this.y); // to move the whole character
+    textAlign(CENTER);
+    textFont(titleFont);
+    textSize(25);
+    fill(191, 64, 191);
+    stroke(0);
+    strokeWeight(2);
+
+    if (this.timer < 60) {
+      this.y += 0.5;
+    }
+    if (this.timer >= 60 && this.timer < 120) {
+      this.y -= 0.5;
+    }
+    if (this.timer >= 120) {
+      this.timer = 0;
+    }
+    if (this.y < 0) {
+      this.y = 0;
+    }
+    text("Choose your character", width / 2, 70);
+  }
 }
 
 let emojiArray = [
@@ -475,6 +610,333 @@ let emojiArray = [
   "😡",
   "👎",
 ];
+
+class SpongeBob {
+  constructor(x, y, s) {
+    this.x = x;
+    this.y = y;
+    this.s = s;
+  }
+  drawSponge() {
+    //armRight
+    push();
+    translate(this.x, this.y); // to move the whole character
+    scale(this.s);
+
+    //body
+    fill(255, 244, 99, 255);
+    beginShape();
+    vertex(248, 100); //1
+    vertex(180, 100); //2
+    vertex(165, 115); //3
+    vertex(175, 168); //4
+    vertex(190, 170); //5
+    vertex(245, 170); //6
+    vertex(248, 100); //7
+    endShape();
+    line(180, 100, 190, 170);
+
+    //shirt
+    fill(255);
+    rect(190, 170, 55, 10);
+    beginShape();
+    vertex(190, 180);
+    vertex(176, 178);
+    vertex(175, 168);
+    vertex(190, 170);
+    endShape();
+
+    //legs
+    fill(255, 244, 99, 255);
+    rect(195, 193, 5, 15);
+    rect(225, 193, 5, 15);
+    fill(255);
+    //socks
+    rect(195, 208, 5, 10);
+    rect(225, 208, 5, 10);
+    //pants things
+    fill(173, 91, 40);
+    ellipse(197, 193, 20, 10);
+    ellipse(227, 193, 20, 10);
+    //shoes
+    fill(0);
+    ellipse(230, 220, 14, 7);
+    ellipse(200, 220, 14, 7);
+    fill(173, 91, 40);
+
+    //pants
+    rect(190, 180, 55, 11);
+    beginShape();
+    vertex(190, 180);
+    vertex(176, 178);
+    vertex(176, 189);
+    vertex(190, 191);
+    endShape();
+
+    //sleeveLeft
+    push();
+    rotate(0.1);
+    fill(255, 244, 99, 255);
+    rect(190, 70, 5, 75, 3);
+    pop();
+    fill(255);
+    arc(175, 160, 13, 25, radians(0), radians(180));
+    arc(175, 160, 13, 3, radians(180), radians(0));
+
+    //eyes
+    fill(255);
+    ellipse(227, 125, 23);
+    ellipse(207, 125, 23);
+    fill(60, 183, 226);
+    ellipse(225, 125, 8);
+    ellipse(210, 125, 8);
+    fill(0);
+    ellipse(225, 125, 3);
+    ellipse(210, 125, 3);
+    push();
+    strokeWeight(2);
+    line(200, 115, 199, 112);
+    line(206, 113, 206, 110);
+    line(212, 114, 213, 111.5);
+
+    line(220, 115, 219, 112);
+    line(226, 113, 226, 110);
+    line(232, 114, 233, 111.5);
+    pop();
+
+    //nose
+    fill(255, 244, 99, 255);
+    arc(216, 136, 25, 6, radians(270), radians(90));
+
+    //mouth
+    fill(255);
+    rect(220, 149, 5);
+    rect(211.5, 149, 5);
+    fill(255, 244, 99, 255);
+    arc(217, 140, 40, 20, radians(0), radians(180));
+    arc(197, 139, 7, 5, radians(0), radians(180));
+    arc(237, 139, 7, 5, radians(0), radians(180));
+
+    //belt
+    fill(0);
+    rect(210, 182, 15, 2);
+    rect(230, 182, 10, 2);
+    rect(195, 182, 10, 2);
+    beginShape();
+    vertex(187, 182);
+    vertex(180, 180.75);
+    vertex(180, 182.75);
+    vertex(187, 184);
+    vertex(187, 182);
+    endShape();
+
+    //collar and tie
+    fill(255);
+    beginShape();
+    vertex(215, 170);
+    vertex(210, 175);
+    vertex(202, 170);
+    vertex(215, 170);
+    endShape();
+
+    beginShape();
+    vertex(232, 170);
+    vertex(225, 175);
+    vertex(220, 170);
+    vertex(230, 170);
+    endShape();
+
+    fill(250, 0, 0);
+    push();
+    strokeWeight(0.5);
+    beginShape();
+    vertex(217.5, 172);
+    vertex(213.5, 182);
+    vertex(217.5, 187);
+    vertex(221.5, 182);
+    vertex(217.5, 172);
+    endShape();
+
+    ellipse(217.5, 172, 6);
+    pop();
+    push();
+    push();
+    rotate(-0.1);
+    stroke(0);
+    fill(255, 244, 99, 255);
+    strokeWeight(1);
+    rect(228, 113, 5, 81, 3);
+    pop();
+
+    fill(255);
+    stroke(1);
+    strokeWeight(1);
+    arc(245, 163, 13, 25, radians(0), radians(90));
+    arc(245, 163, 13, 3, radians(270), radians(0));
+    pop();
+    pop();
+  }
+  draw() {
+    //armRight
+    push();
+    translate(this.x, this.y); // to move the whole character
+    scale(this.s);
+    stroke(255, 244, 99, 255);
+    strokeWeight(5);
+    line(246, 170, 250, 195);
+
+    fill(255);
+    stroke(1);
+    strokeWeight(1);
+    arc(245, 170, 13, 25, radians(180), radians(0));
+    arc(245, 170, 13, 3, radians(0), radians(180));
+
+    //body
+    fill(255, 244, 99, 255);
+    beginShape();
+    vertex(248, 100); //1
+    vertex(180, 100); //2
+    vertex(165, 115); //3
+    vertex(175, 168); //4
+    vertex(190, 170); //5
+    vertex(245, 170); //6
+    vertex(248, 100); //7
+    endShape();
+    line(180, 100, 190, 170);
+
+    //shirt
+    fill(255);
+    rect(190, 170, 55, 10);
+    beginShape();
+    vertex(190, 180);
+    vertex(176, 178);
+    vertex(175, 168);
+    vertex(190, 170);
+    endShape();
+
+    //legs
+    fill(255, 244, 99, 255);
+    rect(195, 193, 5, 15);
+    rect(225, 193, 5, 15);
+    fill(255);
+    //socks
+    rect(195, 208, 5, 10);
+    rect(225, 208, 5, 10);
+    //pants things
+    fill(173, 91, 40);
+    ellipse(197, 193, 20, 10);
+    ellipse(227, 193, 20, 10);
+    //shoes
+    fill(0);
+    ellipse(230, 220, 14, 7);
+    ellipse(200, 220, 14, 7);
+    fill(173, 91, 40);
+
+    //pants
+    rect(190, 180, 55, 11);
+    beginShape();
+    vertex(190, 180);
+    vertex(176, 178);
+    vertex(176, 189);
+    vertex(190, 191);
+    endShape();
+
+    //sleeveLeft
+    fill(255);
+    push();
+    stroke(255, 244, 99, 255);
+    strokeWeight(5);
+    line(174, 170, 170, 195);
+    pop();
+    arc(175, 170, 13, 25, radians(180), radians(0));
+    arc(175, 170, 13, 3, radians(0), radians(180));
+
+    //eyes
+    fill(255);
+    ellipse(227, 125, 23);
+    ellipse(207, 125, 23);
+    fill(60, 183, 226);
+    ellipse(225, 125, 8);
+    ellipse(210, 125, 8);
+    fill(0);
+    ellipse(225, 125, 3);
+    ellipse(210, 125, 3);
+    push();
+    strokeWeight(2);
+    line(200, 115, 199, 112);
+    line(206, 113, 206, 110);
+    line(212, 114, 213, 111.5);
+
+    line(220, 115, 219, 112);
+    line(226, 113, 226, 110);
+    line(232, 114, 233, 111.5);
+    pop();
+
+    //nose
+    fill(255, 244, 99, 255);
+    arc(216, 136, 25, 6, radians(270), radians(90));
+
+    //mouth
+    fill(255);
+    rect(220, 149, 5);
+    rect(211.5, 149, 5);
+    fill(255, 244, 99, 255);
+    arc(217, 140, 40, 20, radians(0), radians(180));
+    arc(197, 139, 7, 5, radians(0), radians(180));
+    arc(237, 139, 7, 5, radians(0), radians(180));
+
+    //belt
+    fill(0);
+    rect(210, 182, 15, 2);
+    rect(230, 182, 10, 2);
+    rect(195, 182, 10, 2);
+    beginShape();
+    vertex(187, 182);
+    vertex(180, 180.75);
+    vertex(180, 182.75);
+    vertex(187, 184);
+    vertex(187, 182);
+    endShape();
+
+    //collar and tie
+    fill(255);
+    beginShape();
+    vertex(215, 170);
+    vertex(210, 175);
+    vertex(202, 170);
+    vertex(215, 170);
+    endShape();
+
+    beginShape();
+    vertex(232, 170);
+    vertex(225, 175);
+    vertex(220, 170);
+    vertex(230, 170);
+    endShape();
+
+    fill(250, 0, 0);
+    push();
+    strokeWeight(0.5);
+    beginShape();
+    vertex(217.5, 172);
+    vertex(213.5, 182);
+    vertex(217.5, 187);
+    vertex(221.5, 182);
+    vertex(217.5, 172);
+    endShape();
+
+    ellipse(217.5, 172, 6);
+    pop();
+  }
+  move(dx) {
+    if (keyIsDown(LEFT_ARROW) && this.x >= -298) {
+      this.x -= dx;
+    }
+    if (keyIsDown(RIGHT_ARROW) && this.x <= 190) {
+      this.x += dx;
+    }
+  }
+}
 
 class FallingEmoji {
   constructor(x, y) {
@@ -519,5 +981,53 @@ class FallingEmoji {
 
     // Only count as collision if falling from above into the basket opening
     return withinHorizontalBounds && crossingTopEdge && this.speed > 0;
+  }
+}
+
+class Character {
+  constructor(x, y, s = 1) {
+    this.x = x;
+    this.y = y;
+    this.s = s;
+  }
+  draw() {
+    push();
+    if (character == "default") {
+      dora.draw();
+      dora.move(10);
+    } else if (character == "sponge") {
+      sponge.drawSponge();
+      sponge.move(10);
+    } else if (character == "cat") {
+      cat.draw();
+      cat.move(12.5);
+    } else if (character == "angelina") {
+      angelina.draw();
+      angelina.move(10);
+    } else if (character == "tim") {
+      tim.draw();
+      tim.move(10);
+    } else if (character == "raul") {
+      raul.draw();
+      raul.move(10);
+    }
+
+    pop();
+  }
+}
+
+function charDisplay() {
+  if (character == "default") {
+    dora.draw();
+  } else if (character == "sponge") {
+    sponge.draw();
+  } else if (character == "cat") {
+    cat.draw();
+  } else if (character == "angelina") {
+    angelina.draw();
+  } else if (character == "tim") {
+    tim.draw();
+  } else if (character == "raul") {
+    raul.draw();
   }
 }
