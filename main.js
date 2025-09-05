@@ -14,7 +14,7 @@ let char;
 let cat, angelina, tim, raul, sponge, dora; // characters
 let scrollX = 0;
 let clicked = false;
-let lives = 3
+let lives = 3;
 function preload() {
   tree = loadImage("mahraganTree.png");
   grass = loadImage("mahraganGrass.png");
@@ -157,6 +157,16 @@ function draw() {
     //draw title
     title.drawTitle();
 
+    angelina = new ANGELINA_CH(5, 400);
+    raul = new Raul(108, 370);
+    sponge = new SpongeBob(-50, 280, 1.55);
+    cat = new Cat(160, 400, 0.6);
+    tim = new TimHortonsCookie(120, 370, 0.8);
+    dora = new Dora(60, 420);
+    basket = new Basket(178, 280);
+
+    fallingEmojis = [];
+
     //draw play button
     fill(50, 205, 50);
     if (
@@ -259,7 +269,7 @@ function draw() {
           fallingEmojis[i].emoji == "😡" ||
           fallingEmojis[i].emoji == "👎"
         ) {
-          lives -= 1
+          lives -= 1;
           if (fallingEmojis[i].size == 40) {
             score -= 30;
           } else if (fallingEmojis[i].size == 30) {
@@ -296,42 +306,46 @@ function draw() {
     textFont(titleFont);
     text("Score: " + score, 490, 10); // Display score
     pop();
-    
-    push()
-    textSize(35)
-    for(let i = 0; i < lives; i++){
-      text("❤️", 10 + i * 40,50)
-    }
-    pop()
 
-    if(lives == 0){
-      screen = "gameover"
+    push();
+    textSize(35);
+    for (let i = 0; i < lives; i++) {
+      text("❤️", 10 + i * 40, 50);
+    }
+    pop();
+
+    if (lives == 0) {
+      screen = "gameover";
     }
   }
-  if (screen == "gameover"){
-    push()
-    textAlign(CENTER)
-    textSize(20)
-    textFont(titleFont)
-    text("Game Over", width/2-20, 200)
-    push()
-    textSize(30)
-    textFont("Arial")
-    text("💔", 370,200)
-    pop()
-    text("Your score was: " + score, width/2, 250)
+  if (screen == "gameover") {
+    push();
+    textAlign(CENTER);
+    textSize(20);
+    textFont(titleFont);
+    text("Game Over", width / 2 - 20, 200);
+    push();
+    textSize(30);
+    textFont("Arial");
+    text("💔", 370, 200);
+    pop();
+    text("Your score was: " + score, width / 2, 250);
 
     fill(50, 205, 50);
-    if(mouseX >= 225 && mouseX <= 325 && mouseY >= 362 && mouseY <= 412 && screen == "gameover"){
+    if (
+      mouseX >= 225 &&
+      mouseX <= 325 &&
+      mouseY >= 362 &&
+      mouseY <= 412 &&
+      screen == "gameover"
+    ) {
       fill(34, 139, 34);
     }
-    rect(225, 360, 100, 50)
-    fill(0)
-    textSize(15)
-    text("Exit", width/2, 395)
-    pop()
-
-    
+    rect(225, 360, 100, 50);
+    fill(0);
+    textSize(15);
+    text("Exit", width / 2, 395);
+    pop();
   }
   if (screen == "character") {
     push();
@@ -599,10 +613,16 @@ function mousePressed() {
     clicked = true;
   }
 
-  if(mouseX >= 225 && mouseX <= 325 && mouseY >= 362 && mouseY <= 412 && screen == "gameover"){
-    screen = "start"
-    lives = 3
-    score = 0
+  if (
+    mouseX >= 225 &&
+    mouseX <= 325 &&
+    mouseY >= 362 &&
+    mouseY <= 412 &&
+    screen == "gameover"
+  ) {
+    screen = "start";
+    lives = 3;
+    score = 0;
   }
 
   if (screen === "sign up") {
