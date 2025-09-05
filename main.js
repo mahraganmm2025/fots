@@ -314,6 +314,20 @@ function draw() {
     }
     pop();
 
+    //exit button
+    push()
+    textFont(titleFont)
+    fill(255, 0, 0);
+    if(mouseX >= 501 && mouseX <= 541 && mouseY >= 10 && mouseY <= 35 && screen == "game"){
+      fill(130, 0, 0)
+    }
+
+    rect(500, 8, 40, 25)
+    fill(0)
+    textSize(20)
+    text("x", 511, 30)
+    pop()
+    
     if (lives == 0) {
       screen = "gameover";
     }
@@ -490,7 +504,7 @@ function draw() {
     }
   }
 
-  //text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
+  text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
 }
 
 function mouseReleased() {
@@ -625,14 +639,8 @@ function mousePressed() {
     score = 0;
   }
 
-  if (screen === "sign up") {
-    usernameField.focused = usernameField.hit(mouseX, mouseY);
-    passwordField.focused =
-      !usernameField.focused && passwordField.hit(mouseX, mouseY);
-    if (signInBtn.hit(mouseX, mouseY)) {
-      console.log("hello");
-      submit();
-    }
+  if(mouseX >= 501 && mouseX <= 541 && mouseY >= 10 && mouseY <= 35 && screen == "game"){
+    screen = "start"
   }
 }
 function keyPressed() {

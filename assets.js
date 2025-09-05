@@ -14,34 +14,44 @@ class ANGELINA_CH {
     }
     scale(this.s);
 
-    push();
     fill(255);
-    beginShape();
-    vertex(250, 123);
-    vertex(200, 180);
-    vertex(220, 180);
-    vertex(250, 145);
-    vertex(250, 123);
-    endShape();
-
-    beginShape();
-    vertex(285, 130);
-    vertex(330, 180);
-    vertex(350, 180);
-    vertex(300, 123);
-    vertex(285, 130);
-    endShape();
-
+    strokeWeight(1)
+    stroke(0)
     push();
     fill(41, 28, 19);
     arc(275, 70, 80, 100, radians(180), radians(0));
-    rect(235, 70, 80, 25);
+    rect(235, 70, 80, 60);
     pop();
+
+
 
     rect(250, 50, 50, 50);
     rect(262.5, 100, 25, 15);
+
+    //left arm
+    rect(225,40,20, 150)
+    noFill()
+    stroke(207, 157, 101)
+    strokeWeight(10)
+    arc(235,30, 30,20,radians(10), radians(190))
+
+
+    //right arm
+    strokeWeight(1)
+    stroke(0)
+    fill(255)
+    rect(305,40,20, 150)
+
+    noFill()
+    stroke(207, 157, 101)
+    strokeWeight(10)
+    arc(315,30, 30,20,radians(-10), radians(170))
+
+
     // body
-    // arc(275, 277, 100, 335, radians(180), radians(0))
+    fill(255)
+    stroke(0)
+    strokeWeight(1)
     ellipse(275, 185, 100, 158);
     // legs
     push();
@@ -50,7 +60,6 @@ class ANGELINA_CH {
     pop();
     line(265, 60, 265, 70);
     line(285, 60, 285, 70);
-
     // stroke(0);
     // fill(0);
     // text("St. Mary (in progress)", 255, 400);
