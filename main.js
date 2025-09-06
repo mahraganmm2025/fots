@@ -1,19 +1,17 @@
 let basket;
 let screen = "start";
-let character = "cat";
+let character = "dog";
 let tree;
 let grass;
 let titleFont;
 let title;
-let usernameField, passwordField, signInBtn;
 let userTable;
 let fallingEmojis = [];
 let lastEmojiSpawn = 0;
 let score = 0;
 let char;
-let cat, angelina, tim, raul, sponge, dora; // characters
-let scrollX = 0;
-let clicked = false;
+let dog, cat, angelina, tim, raul, sponge, dora, tire; // characters
+
 let lives = 3;
 function preload() {
   tree = loadImage("mahraganTree.png");
@@ -30,124 +28,15 @@ function setup() {
   cat = new Cat(160, 400, 0.6);
   tim = new TimHortonsCookie(120, 370, 0.8);
   dora = new Dora(60, 420);
+  tire = new CanadianTire(120, 370, 0.1)
   basket = new Basket(178, 280);
   char = new Character(0, 0);
-  userTable = new p5.Table();
-  userTable.addColumn("username");
-  userTable.addColumn("password"); // ⚠️ plain text; see note below
-  userTable.addColumn("highscore");
-
-  // centered-ish boxes that fit canvas
-  usernameField = new TextField(120, 220, 320, 44, false, titleFont);
-  passwordField = new TextField(120, 340, 320, 44, true, titleFont);
-  signInBtn = new Button(width / 2 - 100, 440, 200, 60, "Sign up");
+  dog = new Dog(205,280,0.45)
 }
 
 function draw() {
   background(107, 218, 248);
 
-  // if (screen == "title") {
-  //   push();
-  //   rectMode(CENTER);
-  //   textAlign(CENTER);
-  //   textFont(titleFont);
-
-  //   //draw title
-  //   title.drawTitle();
-
-  //   //draw sign in button
-  //   fill(50, 205, 50);
-  //   if (
-  //     mouseX >= 328 &&
-  //     mouseX <= 428 &&
-  //     mouseY >= 227 &&
-  //     mouseY <= 277 &&
-  //     screen == "title"
-  //   ) {
-  //     fill(34, 139, 34);
-  //   }
-  //   rect(width / 2 + 100, 250, 100, 50);
-  //   fill(0);
-
-  //   text("Sign in", width / 2 + 100, 255);
-
-  //   //draw sign up button
-  //   fill(50, 205, 50);
-  //   if (
-  //     mouseX >= 128 &&
-  //     mouseX <= 228 &&
-  //     mouseY >= 227 &&
-  //     mouseY <= 277 &&
-  //     screen == "title"
-  //   ) {
-  //     fill(34, 139, 34);
-  //   }
-  //   rect(width / 2 - 100, 250, 100, 50);
-  //   fill(0);
-  //   text("Sign up", width / 2 - 100, 255);
-
-  //   //draw skip button
-  //   fill(50, 205, 50);
-  //   if (
-  //     mouseX >= 228 &&
-  //     mouseX <= 328 &&
-  //     mouseY >= 302 &&
-  //     mouseY <= 352 &&
-  //     screen == "title"
-  //   ) {
-  //     fill(34, 139, 34);
-  //   }
-  //   rect(width / 2, 325, 100, 50);
-  //   fill(0);
-  //   text("Skip", width / 2, 330);
-  //   pop();
-  // }
-  // if (screen == "sign up") {
-  //   push();
-  //   rectMode(CENTER);
-  //   textAlign(CENTER);
-  //   textFont(titleFont);
-  //   textSize(35);
-  //   fill(191, 64, 191);
-  //   stroke(0);
-  //   strokeWeight(2);
-  //   //title
-  //   text("Sign up", width / 2, 75);
-
-  //   //username and password text
-  //   strokeWeight(1);
-  //   fill(191, 64, 191);
-  //   noStroke();
-  //   textAlign(LEFT, CENTER);
-  //   textSize(38);
-  //   strokeWeight(2);
-  //   text("Username", 123, 190);
-  //   text("Password", 123, 315);
-
-  //   // input boxes
-  //   usernameField.draw();
-  //   passwordField.draw();
-  //   textSize(15);
-  //   signInBtn.draw();
-
-  //   //draw back button
-  //   stroke(0);
-  //   strokeWeight(3);
-  //   fill(153);
-  //   if (
-  //     mouseX >= 26 &&
-  //     mouseX <= 126 &&
-  //     mouseY >= 27 &&
-  //     mouseY <= 77 &&
-  //     screen == "sign up"
-  //   )
-  //     fill(100);
-  //   rect(75, 50, 100, 50, 3);
-  //   fill(0);
-  //   strokeWeight(1);
-  //   text("Back", 45, 50);
-  //   pop();
-  // }
   if (screen == "start") {
     push();
     rectMode(CENTER);
@@ -162,8 +51,10 @@ function draw() {
     sponge = new SpongeBob(-50, 280, 1.55);
     cat = new Cat(160, 400, 0.6);
     tim = new TimHortonsCookie(120, 370, 0.8);
+    tire = new CanadianTire(120, 370, 0.1)
     dora = new Dora(60, 420);
     basket = new Basket(178, 280);
+    dog = new Dog(205,280,0.45)
 
     fallingEmojis = [];
 
@@ -184,6 +75,7 @@ function draw() {
     pop();
 
     //draw character button
+    push();
     fill(255, 0, 0);
     if (
       ((mouseX >= 430 && mouseX <= 520 && mouseY >= 480 && mouseY <= 503) ||
@@ -197,6 +89,7 @@ function draw() {
     push();
     strokeWeight(2);
     arc(475, 481, 30, 20, radians(0), radians(180));
+    pop();
     pop();
 
     push();
@@ -212,33 +105,6 @@ function draw() {
     charDisplay();
     pop();
   }
-  // if (screen == "leaderboard") {
-  //   push();
-  //   rectMode(CENTER);
-  //   textAlign(CENTER);
-  //   textFont(titleFont);
-  //   title.drawLeaderboard();
-
-  //   //draw back button
-  //   stroke(0);
-  //   strokeWeight(3);
-  //   fill(153);
-  //   if (
-  //     mouseX >= 26 &&
-  //     mouseX <= 126 &&
-  //     mouseY >= 27 &&
-  //     mouseY <= 77 &&
-  //     screen == "leaderboard"
-  //   )
-  //     fill(100);
-  //   rect(75, 50, 100, 50, 3);
-  //   fill(0);
-  //   strokeWeight(1);
-  //   textAlign(CENTER);
-  //   textSize(15);
-  //   text("Back", 75, 57);
-  //   pop();
-  // }
   if (screen == "game") {
     image(tree, 0, 0, 550, 775);
     image(grass, 0, 400, 650, 200);
@@ -363,148 +229,181 @@ function draw() {
   }
   if (screen == "character") {
     push();
-    push();
     textAlign(CENTER);
     textFont(titleFont);
     title.drawCharacterTitle();
     pop();
 
     push();
-    translate(scrollX, 0);
     //draw dora
     push();
     scale(0.8);
-    translate(-160, -150);
+    translate(-160, -290);
     dora.draw();
     pop();
     //draw cat
     push();
     scale(0.5);
-    translate(250, 420);
+    translate(250, 220);
     cat.draw();
     pop();
     //draw angelina
     push();
     scale(0.7);
-    translate(170, -100);
+    translate(170, -260 );
     angelina.draw();
     pop();
-    // //draw tim
+    //draw tim
     push();
     scale(0.5);
-    translate(575, 105);
+    translate(575, -90);
     tim.draw();
     pop();
-    // //draw raul
-    // push()
-    // raul.draw()
-    // pop()
-    // //draw sponge
-    // push()
-    // sponge.draw()
-    // pop()
+
+    //draw raul
+    push()
+    scale(0.7)
+    translate(-85, 20)
+    raul.draw()
+    pop()
+
+    // draw Canadian
+    push()
+    translate(53, 280)
+    tire.draw()
+    pop()
+
+    //draw dog
+    push()
+    dog.draw()
+    pop()
+
+    //draw sponge
+    push();
+    scale(0.8);
+    translate(260, 50);
+    sponge.draw();
+    pop();
+    pop();
+    
 
     fill(50, 205, 50);
     if (
       mouseX >= 59 &&
       mouseX <= 135 &&
-      mouseY >= 400 &&
-      mouseY <= 440 &&
+      mouseY >= 302 &&
+      mouseY <= 341 &&
       screen == "character"
     )
       fill(34, 139, 34);
-    rect(59, 400, 75, 40);
+    rect(59, 300, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 97, 425);
+    text("Select", 97, 325);
 
     fill(50, 205, 50);
     if (
-      mouseX >= 169 &&
+      mouseX >= 170 &&
       mouseX <= 245 &&
-      mouseY >= 400 &&
-      mouseY <= 440 &&
+      mouseY >= 302 &&
+      mouseY <= 341 &&
       screen == "character"
     )
       fill(34, 139, 34);
-    rect(169, 400, 75, 40);
+    rect(169, 300, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 207, 425);
+    text("Select", 207, 325);
 
     fill(50, 205, 50);
     if (
-      mouseX >= 279 &&
-      mouseX <= 354 &&
-      mouseY >= 400 &&
-      mouseY <= 440 &&
+      mouseX >= 280 &&
+      mouseX <= 356 &&
+      mouseY >= 302 &&
+      mouseY <= 341 &&
       screen == "character"
     )
       fill(34, 139, 34);
-    rect(279, 400, 75, 40);
+    rect(279, 300, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 317, 425);
+    text("Select", 317, 325);
 
     fill(50, 205, 50);
     if (
-      mouseX >= 389 &&
-      mouseX <= 464 &&
-      mouseY >= 400 &&
-      mouseY <= 440 &&
+      mouseX >= 391 &&
+      mouseX <= 465 &&
+      mouseY >= 302 &&
+      mouseY <= 341 &&
       screen == "character"
     )
       fill(34, 139, 34);
-    rect(389, 400, 75, 40);
+    rect(389, 300, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 427, 425);
+    text("Select", 427, 325);
+
+    fill(50, 205, 50);
+    if (
+      mouseX >= 60 &&
+      mouseX <= 135 &&
+      mouseY >= 552 &&
+      mouseY <= 591 &&
+      screen == "character"
+    )
+      fill(34, 139, 34);
+    rect(59, 550, 75, 40);
+    fill(0);
+    textSize(10);
+    text("Select", 97, 575);
+
+    fill(50, 205, 50);
+    if (
+      mouseX >= 170 &&
+      mouseX <= 245 &&
+      mouseY >= 552 &&
+      mouseY <= 591 &&
+      screen == "character"
+    )
+      fill(34, 139, 34);
+    rect(169, 550, 75, 40);
+    fill(0);
+    textSize(10);
+    text("Select", 207, 575);
+
+    fill(50, 205, 50);
+    if (
+      mouseX >= 280 &&
+      mouseX <= 355 &&
+      mouseY >= 552 &&
+      mouseY <= 591 &&
+      screen == "character"
+    )
+      fill(34, 139, 34);
+    rect(279, 550, 75, 40);
+    fill(0);
+    textSize(10);
+    text("Select", 317, 575);
+
+    fill(50, 205, 50);
+    if (
+      mouseX >= 390 &&
+      mouseX <= 465 &&
+      mouseY >= 552 &&
+      mouseY <= 591 &&
+      screen == "character"
+    )
+      fill(34, 139, 34);
+    rect(389, 550, 75, 40);
+    fill(0);
+    textSize(10);
+    text("Select", 427, 575);
     pop();
-    pop();
 
-    if (scrollX >= 0) {
-      push();
-      rectMode(CENTER);
-      fill(175);
-      if (mouseX >= 495 && mouseX <= 545 && mouseY >= 250 && mouseY <= 350) {
-        fill(100);
-      }
-      noStroke();
-      rect(520, height / 2, 50, 100);
-
-      stroke(0);
-      fill(0);
-      strokeWeight(3);
-      line(520, 290, 535, 300);
-      line(520, 310, 535, 300);
-      line(505, 300, 535, 300);
-      pop();
-    }
-    if (scrollX <= -500) {
-      push();
-      rectMode(CENTER);
-      fill(175);
-      if (mouseX >= 10 && mouseX <= 60 && mouseY >= 250 && mouseY <= 350) {
-        fill(100);
-      }
-      noStroke();
-      rect(35, height / 2, 50, 100);
-
-      stroke(0);
-      fill(0);
-      strokeWeight(3);
-      line(20, 300, 35, 290);
-      line(20, 300, 35, 310);
-      line(20, 300, 50, 300);
-      pop();
-    }
-
-    if (scrollX >= -500 && clicked == true) {
-      moveChars1();
-    }
+    
   }
 
-  text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
+  //text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
 }
 
 function mouseReleased() {
@@ -518,32 +417,6 @@ function mouseReleased() {
     screen = "start";
 }
 function mousePressed() {
-  // menu buttons (yours as-is)
-  if (
-    mouseX >= 328 &&
-    mouseX <= 428 &&
-    mouseY >= 227 &&
-    mouseY <= 277 &&
-    screen == "title"
-  )
-    screen = "sign in";
-  if (
-    mouseX >= 128 &&
-    mouseX <= 228 &&
-    mouseY >= 227 &&
-    mouseY <= 277 &&
-    screen == "title"
-  )
-    screen = "sign up";
-
-  // if (
-  //   mouseX >= 178 &&
-  //   mouseX <= 378 &&
-  //   mouseY >= 447 &&
-  //   mouseY <= 497 &&
-  //   screen == "start"
-  // )
-  //   screen = "leaderboard";
   if (
     mouseX >= 178 &&
     mouseX <= 378 &&
@@ -552,22 +425,7 @@ function mousePressed() {
     screen == "start"
   )
     screen = "game";
-  if (
-    mouseX >= 26 &&
-    mouseX <= 126 &&
-    mouseY >= 27 &&
-    mouseY <= 77 &&
-    screen == "sign up"
-  )
-    screen = "title";
-  if (
-    mouseX >= 26 &&
-    mouseX <= 126 &&
-    mouseY >= 27 &&
-    mouseY <= 77 &&
-    screen == "leaderboard"
-  )
-    screen = "start";
+  
   if (
     ((mouseX >= 430 && mouseX <= 520 && mouseY >= 480 && mouseY <= 503) ||
       (mouseX >= 450 && mouseX <= 500 && mouseY >= 480 && mouseY <= 560)) &&
@@ -576,30 +434,30 @@ function mousePressed() {
     screen = "character";
 
   if (
-    mouseX >= 389 &&
-    mouseX <= 464 &&
-    mouseY >= 400 &&
-    mouseY <= 440 &&
+    mouseX >= 391 &&
+    mouseX <= 465 &&
+    mouseY >= 302 &&
+    mouseY <= 341 &&
     screen == "character"
   ) {
     character = "tim";
     screen = "start";
   }
   if (
-    mouseX >= 279 &&
-    mouseX <= 354 &&
-    mouseY >= 400 &&
-    mouseY <= 440 &&
+    mouseX >= 280 &&
+    mouseX <= 356 &&
+    mouseY >= 302 &&
+    mouseY <= 341 &&
     screen == "character"
   ) {
     character = "angelina";
     screen = "start";
   }
   if (
-    mouseX >= 169 &&
+    mouseX >= 170 &&
     mouseX <= 245 &&
-    mouseY >= 400 &&
-    mouseY <= 440 &&
+    mouseY >= 302 &&
+    mouseY <= 341 &&
     screen == "character"
   ) {
     character = "cat";
@@ -608,25 +466,58 @@ function mousePressed() {
   if (
     mouseX >= 59 &&
     mouseX <= 135 &&
-    mouseY >= 400 &&
-    mouseY <= 440 &&
-    screen == "character" &&
-    scrollX == 0
-  ) {
+    mouseY >= 302 &&
+    mouseY <= 341 &&
+    screen == "character"
+  ){
     character = "default";
     screen = "start";
   }
+
   if (
-    mouseX >= 495 &&
-    mouseX <= 545 &&
-    mouseY >= 250 &&
-    mouseY <= 350 &&
-    screen == "character" &&
-    scrollX >= 0
-  ) {
-    clicked = true;
+    mouseX >= 60 &&
+    mouseX <= 135 &&
+    mouseY >= 552 &&
+    mouseY <= 591 &&
+    screen == "character"
+  ){
+    character = "raul";
+    screen = "start";
   }
 
+  if (
+    mouseX >= 170 &&
+    mouseX <= 245 &&
+    mouseY >= 552 &&
+    mouseY <= 591 &&
+    screen == "character"
+  ){
+    character = "tire"
+    screen = "start"
+  }
+
+  if (
+    mouseX >= 280 &&
+    mouseX <= 355 &&
+    mouseY >= 552 &&
+    mouseY <= 591 &&
+    screen == "character"
+  ){
+    character = "dog"
+    screen = "start"
+  }
+
+  if (
+    mouseX >= 390 &&
+    mouseX <= 465 &&
+    mouseY >= 552 &&
+    mouseY <= 591 &&
+    screen == "character"
+  ){
+    character = "sponge";
+    screen = "start";
+  }
+  
   if (
     mouseX >= 225 &&
     mouseX <= 325 &&
@@ -641,192 +532,8 @@ function mousePressed() {
 
   if(mouseX >= 501 && mouseX <= 541 && mouseY >= 10 && mouseY <= 35 && screen == "game"){
     screen = "start"
+    score = 0
+    lives = 3
   }
 }
-function keyPressed() {
-  if (screen !== "sign up") return;
-  if (usernameField.focused) usernameField.onSpecialKey(keyCode);
-  if (passwordField.focused) passwordField.onSpecialKey(keyCode);
-  if (keyCode === ENTER) submit();
-  if (keyCode === TAB) {
-    // simple tab toggle
-    const u = usernameField.focused;
-    usernameField.focused = !u;
-    passwordField.focused = u;
-    return false; // prevent browser tabbing
-  }
-}
-function keyTyped() {
-  if (screen !== "sign up") return;
-  if (usernameField.focused) usernameField.onType(key);
-  if (passwordField.focused) passwordField.onType(key);
-}
-class TextField {
-  constructor(x, y, w, h, isPassword = false, font = null) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.isPassword = isPassword;
-    this.font = font;
-    this.value = "";
-    this.focused = false;
 
-    this.pad = 10;
-    this.textSizePx = 24;
-    this.caretVisible = true;
-    this.lastBlink = 0;
-  }
-
-  draw() {
-    push();
-    rectMode(CORNER);
-    stroke(0);
-    strokeWeight(3);
-    fill(255);
-    rect(this.x, this.y, this.w, this.h);
-
-    noStroke();
-    fill(0);
-    textAlign(LEFT, CENTER);
-    if (this.font) textFont(this.font);
-    textSize(this.textSizePx);
-
-    const shown = this.isPassword ? "•".repeat(this.value.length) : this.value;
-    const tx = this.x + this.pad;
-    const ty = this.y + this.h / 2 + 1;
-    text(shown, tx, ty);
-
-    // caret blink
-    if (this.focused) {
-      if (millis() - this.lastBlink > 500) {
-        this.caretVisible = !this.caretVisible;
-        this.lastBlink = millis();
-      }
-      if (this.caretVisible) {
-        const tw = textWidth(shown);
-        stroke(0);
-        strokeWeight(2);
-        line(tx + tw + 2, this.y + 6, tx + tw + 2, this.y + this.h - 6);
-      }
-    }
-    pop();
-  }
-
-  hit(mx, my) {
-    return (
-      mx >= this.x &&
-      mx <= this.x + this.w &&
-      my >= this.y &&
-      my <= this.y + this.h
-    );
-  }
-
-  onType(k) {
-    if (k.length !== 1) return;
-
-    // test what the next value would look like
-    const next = this.value + k;
-    const shownNext = this.isPassword ? "•".repeat(next.length) : next;
-
-    push();
-    if (this.font) textFont(this.font);
-    textSize(this.textSizePx);
-    const innerW = this.w - this.pad * 2;
-    const fits = textWidth(shownNext) <= innerW;
-    pop();
-
-    if (fits) this.value = next; // only accept if it fits
-  }
-
-  onSpecialKey(code) {
-    if (code === BACKSPACE) this.value = this.value.slice(0, -1);
-  }
-}
-class Button {
-  constructor(x, y, w, h, label) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.label = label;
-    this.normal = color(50, 205, 50);
-    this.hover = color(34, 139, 34);
-  }
-  draw() {
-    push();
-    rectMode(CORNER);
-    stroke(0);
-    strokeWeight(3);
-    fill(this.hit(mouseX, mouseY) ? this.hover : this.normal);
-    rect(this.x, this.y, this.w, this.h, 8);
-    noStroke();
-    fill(0);
-    textAlign(CENTER, CENTER);
-    textSize(20);
-    text(this.label, this.x + this.w / 2, this.y + this.h / 2 + 1);
-    pop();
-  }
-  hit(mx, my) {
-    return (
-      mx > this.x && mx < this.x + this.w && my > this.y && my < this.y + this.h
-    );
-  }
-}
-function submit() {
-  const username = usernameField.value.trim();
-  const password = passwordField.value;
-  const highscore = 0;
-
-  if (!username || !password) {
-    console.log("Please enter both username and password.");
-    return;
-  }
-
-  // const row = userTable.addRow();
-  // row.setString("username", username); // <- match lowercase
-  // row.setString("password", password); // <- match lowercase
-  // row.setNum("highscore", highscore); // <- match lowercase
-
-  // console.log(typeof username);
-  signup(username, password);
-
-  // saveTable(userTable, 'users.csv');    // downloads CSV (client-side)
-  screen = "start";
-}
-async function signup(username, password) {
-  console.log("HI");
-  let res = await fetch("/.netlify/functions/signup", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
-  });
-
-  let data = await res.json();
-  console.log(data);
-  return data;
-}
-async function login(username, password) {
-  let res = await fetch("/.netlify/functions/login", {
-    method: "POST",
-    body: JSON.stringify({ username, password }),
-  });
-  return await res.json();
-}
-async function saveScore(username, score) {
-  let res = await fetch("/.netlify/functions/saveScore", {
-    method: "POST",
-    body: JSON.stringify({ username, score }),
-  });
-  return await res.json();
-}
-function moveChars1() {
-  if (scrollX >= -500) {
-    scrollX -= 25;
-  }
-}
-function moveChars2() {
-  if (scrollX <= 0) {
-    scrollX += 25;
-  }
-}

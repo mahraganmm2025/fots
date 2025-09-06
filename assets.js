@@ -272,9 +272,28 @@ class Cat {
   }
 }
 
-function drawCanadiantire() {
-  background(220);
-  fill(252, 69, 3);
+class CanadianTire {
+  constructor(x, y, s) {
+    this.x = x;
+    this.y = y;
+    this.s = s;
+
+  }
+
+  draw() {
+      if(screen == "game"){
+        scale(0.8)
+        translate(this.x+40, this.y+80); // to move the whole character
+      }
+      else if(screen == "character"){
+        translate(15, 0);
+        scale(0.8)
+      }
+      else if(screen == "start"){
+        translate(155, 400);
+        scale(0.8)
+      }
+    
   // legs
   rect(150, 260, 15, 60);
   rect(185, 260, 15, 60);
@@ -298,9 +317,18 @@ function drawCanadiantire() {
 
   fill(255);
   textStyle(BOLD);
-  text("CANADIAN", 140, 220);
-  text("TIRE", 160, 235);
+  text("CANADIAN", 175, 220);
+  text("TIRE", 175, 235);
   fill(0);
+}
+  move(dx) {
+    if (keyIsDown(LEFT_ARROW) && this.x >= -137) {
+      this.x -= dx;
+    }
+    if (keyIsDown(RIGHT_ARROW) && this.x <= 375) {
+      this.x += dx;
+    }
+  }
 }
 
 class TimHortonsCookie {
@@ -947,6 +975,117 @@ class SpongeBob {
   }
 }
 
+class Dog {
+  constructor(x, y, s) {
+    this.x = x;
+    this.y = y;
+    this.s = s;
+  }
+  draw(){
+    push()
+    translate(this.x, this.y); // to move the whole character
+    scale(this.s);
+    //back legs
+    noStroke()
+    fill(230, 211, 174);
+    rect(190, 420, 50, 140, 20);
+    rect(260, 420, 50, 140, 20);
+
+    //back paws
+    fill(212, 194, 159);
+    noStroke()
+    strokeWeight(1)
+    ellipse(215, 560, 60, 20);
+    ellipse(285, 560, 60, 20);
+
+    // body
+    fill(245, 229, 198)
+    ellipse(250, 400, 180, 240);
+
+    //collar
+    strokeWeight(10)
+    stroke(255,0,0)
+    noFill()
+    arc(250,300,90,20,0,PI)
+
+    // head
+    fill(245, 229, 198);
+    noStroke()
+    ellipse(250, 240, 150, 130);
+
+    // ears
+    fill(222, 186, 140);
+    ellipse(180, 240, 40, 80);
+    ellipse(320, 240, 40, 80);
+
+    // muzzle
+    fill(230, 210, 180);
+    ellipse(250, 270, 100, 50);
+
+    // nose
+    fill(60);
+    ellipse(250, 260, 30, 20);
+
+      // tongue
+    fill(245, 110, 130);
+    ellipse(250, 280, 30, 20);
+
+    // mouth
+    stroke(60);
+    strokeWeight(3);
+    fill(230, 210, 180);
+    arc(232,270,35,25,0,PI)
+    arc(268,270,35,25,0,PI)
+    noStroke();
+
+
+    // eyes (always open)
+    fill(30);
+    ellipse(230, 230, 15, 15);
+    ellipse(270, 230, 15, 15);
+    fill(255);
+    ellipse(234, 226, 5, 5);
+    ellipse(274, 226, 5, 5);
+
+    //front legs
+    fill(230, 211, 174);
+    rect(175, 190, 30, 170, 20);
+    rect(295, 190, 30, 170, 20);
+
+    //front paws
+    fill(212, 194, 159);
+    noStroke()
+    strokeWeight(1)
+    ellipse(193, 190, 50, 40);
+    ellipse(307, 190, 50, 40);
+
+    //palms
+    fill(0)
+    ellipse(193,195,25,17)
+    ellipse(307,195,25,17)
+
+    //fingers?
+    ellipse(180,185,7)
+    ellipse(188,180,7)
+    ellipse(198,180,7)
+    ellipse(206,185,7)
+
+    ellipse(295,185,7)
+    ellipse(303,180,7)
+    ellipse(313,180,7)
+    ellipse(321,185,7)
+    pop()
+  }
+  move(dx) {
+    if (keyIsDown(LEFT_ARROW) && this.x >= 30) {
+      this.x -= dx;
+    }
+    if (keyIsDown(RIGHT_ARROW) && this.x <= 380) {
+      this.x += dx;
+    }
+  }
+}
+
 class FallingEmoji {
   constructor(x, y) {
     this.x = x;
@@ -1019,6 +1158,20 @@ class Character {
     } else if (character == "raul") {
       raul.draw();
       raul.move(10);
+    } else if (character == "dog") {
+      push()
+      scale(1.4)
+      translate(-119, -50)
+      dog.draw();
+      dog.move(7.2);
+      pop()
+    } else if (character == "tire") {
+      push()
+      scale(1.2)
+      translate(-35, -110)
+      tire.draw();
+      tire.move(10.4);
+      pop()
     }
 
     pop();
@@ -1029,14 +1182,34 @@ function charDisplay() {
   if (character == "default") {
     dora.draw();
   } else if (character == "sponge") {
+    push()
+    translate(0,50)
     sponge.draw();
+    pop()
   } else if (character == "cat") {
     cat.draw();
   } else if (character == "angelina") {
     angelina.draw();
   } else if (character == "tim") {
     tim.draw();
+  } else if (character == "tire") {
+    push()
+    scale(1.2)
+    translate(-65, -100)
+    textFont(titleFont)
+    textAlign(CENTER)
+    tire.draw();
+    pop()
   } else if (character == "raul") {
+    push()
+    translate(60,-80)
     raul.draw();
+    pop()
+  } else if(character == "dog"){
+    push()
+    scale(1.3)
+    translate(-105,-20)
+    dog.draw()
+    pop()
   }
 }
