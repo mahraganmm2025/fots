@@ -24,22 +24,26 @@ class ANGELINA_CH {
     pop();
 
 
-
+    // face
+    fill(207, 157, 101)
     rect(250, 50, 50, 50);
     rect(262.5, 100, 25, 15);
+    noFill()
+    arc(275, 80, 20, 20, radians(0),radians(180))
 
     //left arm
+    fill(173, 216, 230)
     rect(225,40,20, 150)
-    noFill()
     stroke(207, 157, 101)
     strokeWeight(10)
+    noFill()
     arc(235,30, 30,20,radians(10), radians(190))
 
 
     //right arm
     strokeWeight(1)
     stroke(0)
-    fill(255)
+    fill(173, 216, 230)
     rect(305,40,20, 150)
 
     noFill()
@@ -49,20 +53,18 @@ class ANGELINA_CH {
 
 
     // body
-    fill(255)
+    fill(173, 216, 230)
     stroke(0)
     strokeWeight(1)
     ellipse(275, 185, 100, 158);
     // legs
     push();
     fill(41, 28, 19);
+    noStroke()
     rect(255, 45, 40, 10);
     pop();
     line(265, 60, 265, 70);
     line(285, 60, 285, 70);
-    // stroke(0);
-    // fill(0);
-    // text("St. Mary (in progress)", 255, 400);
     pop();
 
     pop();
@@ -295,6 +297,7 @@ class CanadianTire {
       }
     
   // legs
+  fill(0)
   rect(150, 260, 15, 60);
   rect(185, 260, 15, 60);
 
@@ -317,8 +320,10 @@ class CanadianTire {
 
   fill(255);
   textStyle(BOLD);
+  textFont(titleFont)
+  textAlign(CENTER)
   text("CANADIAN", 175, 220);
-  text("TIRE", 175, 235);
+  text("TIRED", 175, 235);
   fill(0);
 }
   move(dx) {
@@ -355,7 +360,13 @@ class TimHortonsCookie {
     rect(270, 250, 40);
     rect(120, 170, 45);
     rect(244, 80, 25);
-    textSize(20);
+
+    stroke(210)
+    strokeWeight(30)
+    noFill()
+    arc(200,225, 150, 100, radians(0),radians(180))
+    line(150, 115, 150, 165)
+    line(250, 115, 250, 165)
     pop();
   }
 
@@ -385,7 +396,7 @@ class Dora {
     }
     scale(this.s); // apply scale from the constructor
 
-    fill(255);
+    fill(207, 179, 130);
 
     // left arm
     beginShape();
@@ -446,7 +457,8 @@ class Dora {
     // name
     stroke(0);
     fill(0);
-    text("Dora", 255, 175);
+    textFont(titleFont)
+    text("Dora", 250, 175);
     pop();
   }
 
@@ -632,9 +644,6 @@ let emojiArray = [
   "🍎",
   "🍊",
   "🍓",
-  "🍎",
-  "🍊",
-  "🍓",
   "🍋",
   "🍉",
   "🥭",
@@ -646,6 +655,8 @@ let emojiArray = [
   "☹️",
   "😡",
   "👎",
+  "💣",
+  "😡"
 ];
 
 class SpongeBob {
@@ -1099,9 +1110,38 @@ class FallingEmoji {
 
   draw() {
     push();
+    stroke(255,0,0)
+    fill(255,0,0)
     textAlign(CENTER, CENTER);
     textSize(this.size);
     text(this.emoji, this.x, this.y);
+    if(this.emoji == "🍎"){
+      text("Love", this.x, this.y - 30)
+    }
+    else if(this.emoji == "🍊"){
+      text("Joy", this.x, this.y - 30)
+    }
+    else if(this.emoji == "🍓"){
+      text("Peace", this.x, this.y - 30)
+    }
+    else if(this.emoji == "🍋"){
+      text("Patience", this.x, this.y - 30)
+    }
+    else if(this.emoji == "🍉"){
+      text("Kindness", this.x, this.y - 30)
+    }
+    else if(this.emoji == "🥭"){
+      text("Goodness", this.x, this.y - 30)
+    }
+    else if(this.emoji == "🥝"){
+      text("Faithfulness", this.x, this.y - 30)
+    }
+    else if(this.emoji == "🍌"){
+      text("Gentleness", this.x, this.y - 30)
+    }
+    else if(this.emoji == "🫐"){
+      text("Self Control", this.x, this.y - 30)
+    }
     pop();
   }
 

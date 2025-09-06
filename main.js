@@ -1,6 +1,6 @@
 let basket;
 let screen = "start";
-let character = "dog";
+let character = "default";
 let tree;
 let grass;
 let titleFont;
@@ -238,6 +238,7 @@ function draw() {
     //draw dora
     push();
     scale(0.8);
+    textAlign(LEFT)
     translate(-160, -290);
     dora.draw();
     pop();
