@@ -6,61 +6,57 @@ class ANGELINA_CH {
   }
   draw() {
     push();
-    if(screen == "game"){
+    if (screen == "game") {
       translate(this.x, this.y); // to move the whole character
-    }
-    else{
+    } else {
       translate(0, 400);
     }
     scale(this.s);
 
     fill(255);
-    strokeWeight(1)
-    stroke(0)
+    strokeWeight(1);
+    stroke(0);
     push();
     fill(41, 28, 19);
     arc(275, 70, 80, 100, radians(180), radians(0));
     rect(235, 70, 80, 60);
     pop();
 
-
     // face
-    fill(207, 157, 101)
+    fill(207, 157, 101);
     rect(250, 50, 50, 50);
     rect(262.5, 100, 25, 15);
-    noFill()
-    arc(275, 80, 20, 20, radians(0),radians(180))
+    noFill();
+    arc(275, 80, 20, 20, radians(0), radians(180));
 
     //left arm
-    fill(173, 216, 230)
-    rect(225,40,20, 150)
-    stroke(207, 157, 101)
-    strokeWeight(10)
-    noFill()
-    arc(235,30, 30,20,radians(10), radians(190))
-
+    fill(173, 216, 230);
+    rect(225, 40, 20, 150);
+    stroke(207, 157, 101);
+    strokeWeight(10);
+    noFill();
+    arc(235, 30, 30, 20, radians(10), radians(190));
 
     //right arm
-    strokeWeight(1)
-    stroke(0)
-    fill(173, 216, 230)
-    rect(305,40,20, 150)
+    strokeWeight(1);
+    stroke(0);
+    fill(173, 216, 230);
+    rect(305, 40, 20, 150);
 
-    noFill()
-    stroke(207, 157, 101)
-    strokeWeight(10)
-    arc(315,30, 30,20,radians(-10), radians(170))
-
+    noFill();
+    stroke(207, 157, 101);
+    strokeWeight(10);
+    arc(315, 30, 30, 20, radians(-10), radians(170));
 
     // body
-    fill(173, 216, 230)
-    stroke(0)
-    strokeWeight(1)
+    fill(173, 216, 230);
+    stroke(0);
+    strokeWeight(1);
     ellipse(275, 185, 100, 158);
     // legs
     push();
     fill(41, 28, 19);
-    noStroke()
+    noStroke();
     rect(255, 45, 40, 10);
     pop();
     line(265, 60, 265, 70);
@@ -70,10 +66,16 @@ class ANGELINA_CH {
     pop();
   }
   move(dx) {
-    if (keyIsDown(LEFT_ARROW) && this.x >= -240) {
+    if (
+      (keyIsDown(LEFT_ARROW) && this.x >= -240) ||
+      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -240)
+    ) {
       this.x -= dx;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.x <= 250) {
+    if (
+      (keyIsDown(RIGHT_ARROW) && this.x <= 250) ||
+      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 250)
+    ) {
       this.x += dx;
     }
   }
@@ -86,10 +88,9 @@ class Raul {
     this.s = s;
   }
   draw() {
-    if(screen == "game"){
+    if (screen == "game") {
       translate(this.x, this.y); // to move the whole character
-    }
-    else{
+    } else {
       translate(50, 450);
     }
     scale(this.s);
@@ -162,10 +163,16 @@ class Raul {
     pop();
   }
   move(dx) {
-    if (keyIsDown(LEFT_ARROW) && this.x >= -140) {
+    if (
+      (keyIsDown(LEFT_ARROW) && this.x >= -140) ||
+      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -140)
+    ) {
       this.x -= dx;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.x <= 350) {
+    if (
+      (keyIsDown(RIGHT_ARROW) && this.x <= 350) ||
+      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 350)
+    ) {
       this.x += dx;
     }
   }
@@ -178,18 +185,16 @@ class Cat {
     this.s = s;
   }
   draw() {
-    if(screen == "game"){
-      scale(0.8)
-      translate(this.x+40, this.y+80); // to move the whole character
-    }
-    else if(screen == "character"){
+    if (screen == "game") {
+      scale(0.8);
+      translate(this.x + 40, this.y + 80); // to move the whole character
+    } else if (screen == "character") {
       translate(15, 0);
-    }
-    else if(screen == "start"){
+    } else if (screen == "start") {
       translate(155, 400);
-      scale(0.8)
+      scale(0.8);
     }
-    
+
     push();
     scale(0.75);
     fill(255);
@@ -265,10 +270,16 @@ class Cat {
     pop();
   }
   move(dx) {
-    if (keyIsDown(LEFT_ARROW) && this.x >= -150) {
+    if (
+      (keyIsDown(LEFT_ARROW) && this.x >= -150) ||
+      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -150)
+    ) {
       this.x -= dx;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.x <= 460) {
+    if (
+      (keyIsDown(RIGHT_ARROW) && this.x <= 460) ||
+      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 460)
+    ) {
       this.x += dx;
     }
   }
@@ -279,58 +290,61 @@ class CanadianTire {
     this.x = x;
     this.y = y;
     this.s = s;
-
   }
 
   draw() {
-      if(screen == "game"){
-        scale(0.8)
-        translate(this.x+40, this.y+80); // to move the whole character
-      }
-      else if(screen == "character"){
-        translate(15, 0);
-        scale(0.8)
-      }
-      else if(screen == "start"){
-        translate(155, 400);
-        scale(0.8)
-      }
-    
-  // legs
-  fill(0)
-  rect(150, 260, 15, 60);
-  rect(185, 260, 15, 60);
+    if (screen == "game") {
+      scale(0.8);
+      translate(this.x + 40, this.y + 80); // to move the whole character
+    } else if (screen == "character") {
+      translate(15, 0);
+      scale(0.8);
+    } else if (screen == "start") {
+      translate(155, 400);
+      scale(0.8);
+    }
 
-  // arms
-  rect(120, 130, 15, 90);
-  rect(215, 130, 15, 90);
+    // legs
+    fill(0);
+    rect(150, 260, 15, 60);
+    rect(185, 260, 15, 60);
 
-  fill(237, 120, 52);
-  beginShape();
-  vertex(100, 191);
-  vertex(175, 300);
-  vertex(250, 191);
-  vertex(100, 191);
-  endShape();
+    // arms
+    rect(120, 130, 15, 90);
+    rect(215, 130, 15, 90);
 
-  fill(0, 255, 0);
-  arc(150, 190, 30, 50, radians(180), radians(0));
-  arc(200, 190, 30, 50, radians(180), radians(0));
-  arc(175, 190, 30, 90, radians(180), radians(0));
+    fill(237, 120, 52);
+    beginShape();
+    vertex(100, 191);
+    vertex(175, 300);
+    vertex(250, 191);
+    vertex(100, 191);
+    endShape();
 
-  fill(255);
-  textStyle(BOLD);
-  textFont(titleFont)
-  textAlign(CENTER)
-  text("CANADIAN", 175, 220);
-  text("TIRED", 175, 235);
-  fill(0);
-}
+    fill(0, 255, 0);
+    arc(150, 190, 30, 50, radians(180), radians(0));
+    arc(200, 190, 30, 50, radians(180), radians(0));
+    arc(175, 190, 30, 90, radians(180), radians(0));
+
+    fill(255);
+    textStyle(BOLD);
+    textFont(titleFont);
+    textAlign(CENTER);
+    text("CANADIAN", 175, 220);
+    text("TIRED", 175, 235);
+    fill(0);
+  }
   move(dx) {
-    if (keyIsDown(LEFT_ARROW) && this.x >= -137) {
+    if (
+      (keyIsDown(LEFT_ARROW) && this.x >= -137) ||
+      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -137)
+    ) {
       this.x -= dx;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.x <= 375) {
+    if (
+      (keyIsDown(RIGHT_ARROW) && this.x <= 375) ||
+      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 375)
+    ) {
       this.x += dx;
     }
   }
@@ -349,6 +363,10 @@ class TimHortonsCookie {
     fill(230, 166, 103);
     ellipse(200, 200, 300);
 
+    push();
+    fill(230, 166, 103);
+    ellipse(200, 200, 300);
+
     fill(33, 22, 12);
     ellipse(200, 200, 50);
     ellipse(300, 200, 30);
@@ -360,21 +378,35 @@ class TimHortonsCookie {
     rect(270, 250, 40);
     rect(120, 170, 45);
     rect(244, 80, 25);
+    textSize(20);
+    pop();
+    fill(179, 21, 139);
 
-    stroke(210)
-    strokeWeight(30)
-    noFill()
-    arc(200,225, 150, 100, radians(0),radians(180))
-    line(150, 115, 150, 165)
-    line(250, 115, 250, 165)
+    ellipse(122, 149, 60, 60);
+    ellipse(275, 145, 60, 60);
+
+    push();
+
+    strokeWeight(25);
+    stroke(16, 139, 232);
+    noFill();
+    arc(198, 240, 200, 100, radians(0), radians(180));
+    pop();
+
     pop();
   }
 
   move(dx) {
-    if (keyIsDown(LEFT_ARROW) && this.x >= -128) {
+    if (
+      (keyIsDown(LEFT_ARROW) && this.x >= -128) ||
+      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -128)
+    ) {
       this.x -= dx;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.x <= 360) {
+    if (
+      (keyIsDown(RIGHT_ARROW) && this.x <= 360) ||
+      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 360)
+    ) {
       this.x += dx;
     }
   }
@@ -388,10 +420,9 @@ class Dora {
   }
   draw() {
     push();
-    if(screen == "game"){
+    if (screen == "game") {
       translate(this.x, this.y); // to move the whole character
-    }
-    else{
+    } else {
       translate(60, 425);
     }
     scale(this.s); // apply scale from the constructor
@@ -457,36 +488,28 @@ class Dora {
     // name
     stroke(0);
     fill(0);
-    textFont(titleFont)
+    textFont(titleFont);
     text("Dora", 250, 175);
     pop();
   }
 
   move(dx) {
-    if (keyIsDown(LEFT_ARROW) && this.x >= -188) {
+    if (
+      (keyIsDown(LEFT_ARROW) && this.x >= -188) ||
+      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -188)
+    ) {
       this.x -= dx;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.x <= 300) {
+    if (
+      (keyIsDown(RIGHT_ARROW) && this.x <= 300) ||
+      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 300)
+    ) {
       this.x += dx;
     }
-    if(screen == "gameover"){
-      this.x = 0
+    if (screen == "gameover") {
+      this.x = 0;
     }
   }
-}
-
-function drawAlex() {
-  background(220);
-  fill(236, 240, 201);
-  rect(170, 180, 70, 150);
-  ellipse(200, 104, 150, 150);
-  ellipse(156, 91, 20, 20);
-  ellipse(241, 91, 20, 20);
-  stroke(40, 41, 38);
-  arc(200, 107, 80, 80, radians(0), radians(180));
-  rect(190, 329, 5, 50);
-  text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
-  rect(211, 329, 5, 50);
 }
 
 class Basket {
@@ -541,10 +564,16 @@ class Basket {
   }
 
   move(dx) {
-    if (keyIsDown(LEFT_ARROW) && this.x >= -70) {
+    if (
+      (keyIsDown(LEFT_ARROW) && this.x >= -70) ||
+      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -70)
+    ) {
       this.x -= dx;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.x <= 420) {
+    if (
+      (keyIsDown(RIGHT_ARROW) && this.x <= 420) ||
+      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 420)
+    ) {
       this.x += dx;
     }
   }
@@ -656,7 +685,7 @@ let emojiArray = [
   "😡",
   "👎",
   "💣",
-  "😡"
+  "😡",
 ];
 
 class SpongeBob {
@@ -977,10 +1006,16 @@ class SpongeBob {
     pop();
   }
   move(dx) {
-    if (keyIsDown(LEFT_ARROW) && this.x >= -298) {
+    if (
+      (keyIsDown(LEFT_ARROW) && this.x >= -298) ||
+      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -298)
+    ) {
       this.x -= dx;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.x <= 190) {
+    if (
+      (keyIsDown(RIGHT_ARROW) && this.x <= 190) ||
+      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 190)
+    ) {
       this.x += dx;
     }
   }
@@ -992,36 +1027,36 @@ class Dog {
     this.y = y;
     this.s = s;
   }
-  draw(){
-    push()
+  draw() {
+    push();
     translate(this.x, this.y); // to move the whole character
     scale(this.s);
     //back legs
-    noStroke()
+    noStroke();
     fill(230, 211, 174);
     rect(190, 420, 50, 140, 20);
     rect(260, 420, 50, 140, 20);
 
     //back paws
     fill(212, 194, 159);
-    noStroke()
-    strokeWeight(1)
+    noStroke();
+    strokeWeight(1);
     ellipse(215, 560, 60, 20);
     ellipse(285, 560, 60, 20);
 
     // body
-    fill(245, 229, 198)
+    fill(245, 229, 198);
     ellipse(250, 400, 180, 240);
 
     //collar
-    strokeWeight(10)
-    stroke(255,0,0)
-    noFill()
-    arc(250,300,90,20,0,PI)
+    strokeWeight(10);
+    stroke(255, 0, 0);
+    noFill();
+    arc(250, 300, 90, 20, 0, PI);
 
     // head
     fill(245, 229, 198);
-    noStroke()
+    noStroke();
     ellipse(250, 240, 150, 130);
 
     // ears
@@ -1037,7 +1072,7 @@ class Dog {
     fill(60);
     ellipse(250, 260, 30, 20);
 
-      // tongue
+    // tongue
     fill(245, 110, 130);
     ellipse(250, 280, 30, 20);
 
@@ -1045,10 +1080,9 @@ class Dog {
     stroke(60);
     strokeWeight(3);
     fill(230, 210, 180);
-    arc(232,270,35,25,0,PI)
-    arc(268,270,35,25,0,PI)
+    arc(232, 270, 35, 25, 0, PI);
+    arc(268, 270, 35, 25, 0, PI);
     noStroke();
-
 
     // eyes (always open)
     fill(30);
@@ -1065,33 +1099,39 @@ class Dog {
 
     //front paws
     fill(212, 194, 159);
-    noStroke()
-    strokeWeight(1)
+    noStroke();
+    strokeWeight(1);
     ellipse(193, 190, 50, 40);
     ellipse(307, 190, 50, 40);
 
     //palms
-    fill(0)
-    ellipse(193,195,25,17)
-    ellipse(307,195,25,17)
+    fill(0);
+    ellipse(193, 195, 25, 17);
+    ellipse(307, 195, 25, 17);
 
     //fingers?
-    ellipse(180,185,7)
-    ellipse(188,180,7)
-    ellipse(198,180,7)
-    ellipse(206,185,7)
+    ellipse(180, 185, 7);
+    ellipse(188, 180, 7);
+    ellipse(198, 180, 7);
+    ellipse(206, 185, 7);
 
-    ellipse(295,185,7)
-    ellipse(303,180,7)
-    ellipse(313,180,7)
-    ellipse(321,185,7)
-    pop()
+    ellipse(295, 185, 7);
+    ellipse(303, 180, 7);
+    ellipse(313, 180, 7);
+    ellipse(321, 185, 7);
+    pop();
   }
   move(dx) {
-    if (keyIsDown(LEFT_ARROW) && this.x >= 30) {
+    if (
+      (keyIsDown(LEFT_ARROW) && this.x >= 30) ||
+      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= 30)
+    ) {
       this.x -= dx;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.x <= 380) {
+    if (
+      (keyIsDown(RIGHT_ARROW) && this.x <= 380) ||
+      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 380)
+    ) {
       this.x += dx;
     }
   }
@@ -1110,37 +1150,29 @@ class FallingEmoji {
 
   draw() {
     push();
-    stroke(255,0,0)
-    fill(255,0,0)
+    stroke(255, 0, 0);
+    fill(255, 0, 0);
     textAlign(CENTER, CENTER);
     textSize(this.size);
     text(this.emoji, this.x, this.y);
-    if(this.emoji == "🍎"){
-      text("Love", this.x, this.y - 30)
-    }
-    else if(this.emoji == "🍊"){
-      text("Joy", this.x, this.y - 30)
-    }
-    else if(this.emoji == "🍓"){
-      text("Peace", this.x, this.y - 30)
-    }
-    else if(this.emoji == "🍋"){
-      text("Patience", this.x, this.y - 30)
-    }
-    else if(this.emoji == "🍉"){
-      text("Kindness", this.x, this.y - 30)
-    }
-    else if(this.emoji == "🥭"){
-      text("Goodness", this.x, this.y - 30)
-    }
-    else if(this.emoji == "🥝"){
-      text("Faithfulness", this.x, this.y - 30)
-    }
-    else if(this.emoji == "🍌"){
-      text("Gentleness", this.x, this.y - 30)
-    }
-    else if(this.emoji == "🫐"){
-      text("Self Control", this.x, this.y - 30)
+    if (this.emoji == "🍎") {
+      text("Love", this.x, this.y - 30);
+    } else if (this.emoji == "🍊") {
+      text("Joy", this.x, this.y - 30);
+    } else if (this.emoji == "🍓") {
+      text("Peace", this.x, this.y - 30);
+    } else if (this.emoji == "🍋") {
+      text("Patience", this.x, this.y - 30);
+    } else if (this.emoji == "🍉") {
+      text("Kindness", this.x, this.y - 30);
+    } else if (this.emoji == "🥭") {
+      text("Goodness", this.x, this.y - 30);
+    } else if (this.emoji == "🥝") {
+      text("Faithfulness", this.x, this.y - 30);
+    } else if (this.emoji == "🍌") {
+      text("Gentleness", this.x, this.y - 30);
+    } else if (this.emoji == "🫐") {
+      text("Self Control", this.x, this.y - 30);
     }
     pop();
   }
@@ -1199,19 +1231,19 @@ class Character {
       raul.draw();
       raul.move(10);
     } else if (character == "dog") {
-      push()
-      scale(1.4)
-      translate(-119, -50)
+      push();
+      scale(1.4);
+      translate(-119, -50);
       dog.draw();
       dog.move(7.2);
-      pop()
+      pop();
     } else if (character == "tire") {
-      push()
-      scale(1.2)
-      translate(-35, -110)
+      push();
+      scale(1.2);
+      translate(-35, -110);
       tire.draw();
       tire.move(10.4);
-      pop()
+      pop();
     }
 
     pop();
@@ -1222,10 +1254,10 @@ function charDisplay() {
   if (character == "default") {
     dora.draw();
   } else if (character == "sponge") {
-    push()
-    translate(0,50)
+    push();
+    translate(0, 50);
     sponge.draw();
-    pop()
+    pop();
   } else if (character == "cat") {
     cat.draw();
   } else if (character == "angelina") {
@@ -1233,23 +1265,23 @@ function charDisplay() {
   } else if (character == "tim") {
     tim.draw();
   } else if (character == "tire") {
-    push()
-    scale(1.2)
-    translate(-65, -100)
-    textFont(titleFont)
-    textAlign(CENTER)
+    push();
+    scale(1.2);
+    translate(-65, -100);
+    textFont(titleFont);
+    textAlign(CENTER);
     tire.draw();
-    pop()
+    pop();
   } else if (character == "raul") {
-    push()
-    translate(60,-80)
+    push();
+    translate(60, -80);
     raul.draw();
-    pop()
-  } else if(character == "dog"){
-    push()
-    scale(1.3)
-    translate(-105,-20)
-    dog.draw()
-    pop()
+    pop();
+  } else if (character == "dog") {
+    push();
+    scale(1.3);
+    translate(-105, -20);
+    dog.draw();
+    pop();
   }
 }
