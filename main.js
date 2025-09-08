@@ -180,18 +180,19 @@ function draw() {
     }
     pop();
 
-    //exit button
+    //pause button
     push()
-    textFont(titleFont)
-    fill(255, 0, 0);
+    fill(200);
     if(mouseX >= 501 && mouseX <= 541 && mouseY >= 10 && mouseY <= 35 && screen == "game"){
-      fill(130, 0, 0)
+      fill(110)
     }
-
+    
     rect(500, 8, 40, 25)
+    
     fill(0)
-    textSize(20)
-    text("x", 511, 30)
+    rect(513,15,3,12)
+    rect(523,15,3,12)
+    
     pop()
     
     if (lives == 0) {
@@ -403,6 +404,47 @@ function draw() {
 
     
   }
+  if (screen == "pause"){
+    push()
+    textFont(titleFont)
+    
+    push()
+    textAlign(CENTER)
+    
+    textSize(40)
+    fill(191, 64, 191)
+    stroke(0)
+    strokeWeight(3)
+    text("Paused", 275, 50)
+    pop()
+
+    push()
+    textAlign(CENTER)
+    rectMode(CENTER)
+    fill(50, 205, 50);
+    if(mouseX >= 205 && mouseX <= 347 && mouseY >= 176 && mouseY <= 225 && screen == "pause"){
+      fill(34, 139, 34);
+    }
+    rect(275, 200, 140, 50);
+    fill(0);
+    textSize(15);
+    text("Resume", 275, 210);
+    pop()
+
+    push()
+    textAlign(CENTER)
+    rectMode(CENTER)
+    fill(255,0,0)
+    if(mouseX >= 205 && mouseX <= 347 && mouseY >= 276 && mouseY <= 325 && screen == "pause"){
+      fill(130,0,0)
+    }
+    rect(275, 300, 140, 50);
+    fill(0);
+    textSize(15);
+    text("Exit", 275, 310);
+    pop()
+    pop()
+  }
 
   //text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
 }
@@ -532,9 +574,17 @@ function mousePressed() {
   }
 
   if(mouseX >= 501 && mouseX <= 541 && mouseY >= 10 && mouseY <= 35 && screen == "game"){
+    screen = "pause"
+  }
+
+  if(mouseX >= 205 && mouseX <= 347 && mouseY >= 176 && mouseY <= 225 && screen == "pause"){
+    screen = "game"
+  }
+  
+  if(mouseX >= 205 && mouseX <= 347 && mouseY >= 276 && mouseY <= 325 && screen == "pause"){
     screen = "start"
-    score = 0
-    lives = 3
+    lives = 3;
+    score = 0;
   }
 }
 
