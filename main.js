@@ -44,8 +44,8 @@ function setup() {
   basket = new Basket(178, 280);
   char = new Character(0, 0);
   dog = new Dog(205, 280, 0.45);
-  abouna_g = new Abouna(abouna_g_pic, 50, -120, 300, 700, 1);
-  abouna_d = new Abouna(abouna_d_pic, 300, 100, 300, 400, 0.8);
+  // abouna_g = new Abouna(abouna_g_pic, 50, -120, 300, 700, 1);
+  // abouna_d = new Abouna(abouna_d_pic, 300, 100, 300, 400, 0.8);
   startTime = millis();
 }
 
@@ -479,17 +479,17 @@ function draw() {
     text("<", 55 + 20 / 2, 345 + 50 / 2);
 
     // Show abounas
-    abouna_g.display();
-    abouna_d.display();
+    // abouna_g.display();
+    // abouna_d.display();
 
     // push();
-    fill(50, 205, 50);
-    if (mouseX >= 150 && mouseX <= 250 && mouseY >= 440 && mouseY <= 480)
-      fill(34, 139, 34);
-    rect(150, 440, 100, 40);
-    fill(0);
-    textSize(10);
-    text("Select", 250 / 2, 480 / 2);
+    // fill(50, 205, 50);
+    // if (mouseX >= 150 && mouseX <= 250 && mouseY >= 440 && mouseY <= 480)
+    //   fill(34, 139, 34);
+    // rect(150, 440, 100, 40);
+    // fill(0);
+    // textSize(10);
+    // text("Select", 250 / 2, 480 / 2);
     // pop();
   }
   if (screen == "pause") {
@@ -546,7 +546,7 @@ function draw() {
     pop();
   }
 
-  text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
+  // text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
 }
 
 function mouseReleased() {
