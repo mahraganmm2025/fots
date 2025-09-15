@@ -80,7 +80,6 @@ class ANGELINA_CH {
     }
   }
 }
-
 class Raul {
   constructor(x, y, s = 0.85) {
     this.x = x;
@@ -177,7 +176,6 @@ class Raul {
     }
   }
 }
-
 class Cat {
   constructor(x, y, s) {
     this.x = x;
@@ -284,7 +282,6 @@ class Cat {
     }
   }
 }
-
 class CanadianTire {
   constructor(x, y, s) {
     this.x = x;
@@ -349,7 +346,6 @@ class CanadianTire {
     }
   }
 }
-
 class TimHortonsCookie {
   constructor(x, y, s) {
     this.x = x;
@@ -411,7 +407,6 @@ class TimHortonsCookie {
     }
   }
 }
-
 class Dora {
   constructor(x, y, s = 0.8) {
     this.x = x;
@@ -511,7 +506,37 @@ class Dora {
     }
   }
 }
-
+class Abouna {
+  constructor(img, x, y, w, h, s) {
+    this.img = img;
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.s = s;
+  }
+  display() {
+    if (this.img) {
+      image(this.img, this.x, this.y, this.w * this.s, this.h * this.s);
+    } else {
+      console.log("Image missing!");
+    }
+  }
+  move() {
+    if (
+      (keyIsDown(LEFT_ARROW) && this.x >= -188) ||
+      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -188)
+    ) {
+      this.x -= dx;
+    }
+    if (
+      (keyIsDown(RIGHT_ARROW) && this.x <= 300) ||
+      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 300)
+    ) {
+      this.x += dx;
+    }
+  }
+}
 class Basket {
   constructor(x, y, s = 0.5) {
     this.x = x;
@@ -581,7 +606,6 @@ class Basket {
     this.move(10);
   }
 }
-
 class Title {
   timer = 0;
   constructor(x, y) {

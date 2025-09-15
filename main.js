@@ -11,11 +11,23 @@ let lastEmojiSpawn = 0;
 let score = 0;
 let char;
 let dog, cat, angelina, tim, raul, sponge, dora, tire; // characters
-
+let gameStartTimer = 0;
+let abouna_g_pic;
+let abouna_d_pic;
+let abouna_g;
+let abouna_d;
 let lives = 3;
+
+let startTime;
+let countdown = 4;
+let goDuration = 0;
+let gameStarted = false;
+
 function preload() {
   tree = loadImage("mahraganTree.png");
   grass = loadImage("mahraganGrass.png");
+  abouna_g_pic = loadImage("abouna_g.png");
+  abouna_d_pic = loadImage("abouna_d.png");
   titleFont = loadFont("Assets/PressStart2P-Regular.ttf");
 }
 
@@ -28,10 +40,13 @@ function setup() {
   cat = new Cat(160, 400, 0.6);
   tim = new TimHortonsCookie(120, 370, 0.8);
   dora = new Dora(60, 420);
-  tire = new CanadianTire(120, 370, 0.1)
+  tire = new CanadianTire(120, 370, 0.1);
   basket = new Basket(178, 280);
   char = new Character(0, 0);
-  dog = new Dog(205,280,0.45)
+  dog = new Dog(205, 280, 0.45);
+  abouna_g = new Abouna(abouna_g_pic, 50, -120, 300, 700, 1);
+  abouna_d = new Abouna(abouna_d_pic, 300, 100, 300, 400, 0.8);
+  startTime = millis();
 }
 
 function draw() {
@@ -51,10 +66,10 @@ function draw() {
     sponge = new SpongeBob(-50, 280, 1.55);
     cat = new Cat(160, 400, 0.6);
     tim = new TimHortonsCookie(120, 370, 0.8);
-    tire = new CanadianTire(120, 370, 0.1)
+    tire = new CanadianTire(120, 370, 0.1);
     dora = new Dora(60, 420);
     basket = new Basket(178, 280);
-    dog = new Dog(205,280,0.45)
+    dog = new Dog(205, 280, 0.45);
 
     fallingEmojis = [];
 
@@ -105,6 +120,7 @@ function draw() {
     charDisplay();
     pop();
   }
+
   if (screen == "game") {
     image(tree, 0, 0, 550, 775);
     image(grass, 0, 400, 650, 200);
@@ -181,20 +197,51 @@ function draw() {
     pop();
 
     //pause button
-    push()
+    push();
     fill(200);
-    if(mouseX >= 501 && mouseX <= 541 && mouseY >= 10 && mouseY <= 35 && screen == "game"){
-      fill(110)
+    if (
+      mouseX >= 501 &&
+      mouseX <= 541 &&
+      mouseY >= 10 &&
+      mouseY <= 35 &&
+      screen == "game"
+    ) {
+      fill(110);
     }
-    
-    rect(500, 8, 40, 25)
-    
-    fill(0)
-    rect(513,15,3,12)
-    rect(523,15,3,12)
-    
-    pop()
-    
+
+    rect(500, 8, 40, 25);
+
+    fill(0);
+    rect(513, 15, 3, 12);
+    rect(523, 15, 3, 12);
+
+    pop();
+
+    let elapsed = (millis() - startTime) / 1000;
+
+    if (!gameStarted) {
+      // how many seconds left in countdown
+      let remaining = countdown - ceil(elapsed);
+
+      if (remaining > 0 && remaining <= 3) {
+        push();
+        textSize(50);
+        fill(255, 0, 0);
+        textAlign(CENTER, CENTER);
+        text(ceil(remaining), width / 2, height / 2); // 3..2..1
+        pop();
+      } else if (elapsed < countdown + goDuration) {
+        push();
+        fill(255, 0, 0);
+        textSize(50);
+        textAlign(CENTER, CENTER);
+        text("GO!", width / 2, height / 2); // show "GO!" for 2s
+        pop();
+      } else {
+        gameStarted = true; // now switch to game
+      }
+    }
+
     if (lives == 0) {
       screen = "gameover";
     }
@@ -227,6 +274,11 @@ function draw() {
     textSize(15);
     text("Exit", width / 2, 395);
     pop();
+
+    gameStarted = false;
+    startTime = millis();
+    countdown = 4;
+    goDuration = 1;
   }
   if (screen == "character") {
     push();
@@ -239,7 +291,7 @@ function draw() {
     //draw dora
     push();
     scale(0.8);
-    textAlign(LEFT)
+    textAlign(LEFT);
     translate(-160, -290);
     dora.draw();
     pop();
@@ -252,7 +304,7 @@ function draw() {
     //draw angelina
     push();
     scale(0.7);
-    translate(170, -260 );
+    translate(170, -260);
     angelina.draw();
     pop();
     //draw tim
@@ -261,25 +313,21 @@ function draw() {
     translate(575, -90);
     tim.draw();
     pop();
-
     //draw raul
-    push()
-    scale(0.7)
-    translate(-85, 20)
-    raul.draw()
-    pop()
-
+    push();
+    scale(0.7);
+    translate(-85, 20);
+    raul.draw();
+    pop();
     // draw Canadian
-    push()
-    translate(53, 280)
-    tire.draw()
-    pop()
-
+    push();
+    translate(53, 280);
+    tire.draw();
+    pop();
     //draw dog
-    push()
-    dog.draw()
-    pop()
-
+    push();
+    dog.draw();
+    pop();
     //draw sponge
     push();
     scale(0.8);
@@ -287,7 +335,6 @@ function draw() {
     sponge.draw();
     pop();
     pop();
-    
 
     fill(50, 205, 50);
     if (
@@ -400,53 +447,106 @@ function draw() {
     fill(0);
     textSize(10);
     text("Select", 427, 575);
+    // pop();
+
+    // next page button on characters screen
+    // Check hover
+    if (mouseX > 500 && mouseX < 520 && mouseY > 345 && mouseY < 395) {
+      fill(180); // hover color
+    } else {
+      fill(200); // normal color
+    }
+    // Draw button rectangle
+    rect(500, 345, 20, 50, 10);
+
+    // Button text
+    fill(0);
+    textAlign(CENTER, CENTER);
+    text(">", 500 + 20 / 2, 345 + 50 / 2);
+  }
+
+  if (screen == "character2") {
+    // first char page button on character2 screen
+    // Check hover
+    if (mouseX > 55 && mouseX < 75 && mouseY > 345 && mouseY < 395) {
+      fill(180); // hover color
+    } else {
+      fill(200); // normal color
+    }
+    rect(55, 345, 20, 50, 10);
+    fill(0);
+    textAlign(CENTER, CENTER);
+    text("<", 55 + 20 / 2, 345 + 50 / 2);
+
+    // Show abounas
+    abouna_g.display();
+    abouna_d.display();
+
+    // push();
+    fill(50, 205, 50);
+    if (mouseX >= 150 && mouseX <= 250 && mouseY >= 440 && mouseY <= 480)
+      fill(34, 139, 34);
+    rect(150, 440, 100, 40);
+    fill(0);
+    textSize(10);
+    text("Select", 250 / 2, 480 / 2);
+    // pop();
+  }
+  if (screen == "pause") {
+    push();
+    textFont(titleFont);
+
+    push();
+    textAlign(CENTER);
+
+    textSize(40);
+    fill(191, 64, 191);
+    stroke(0);
+    strokeWeight(3);
+    text("Paused", 275, 50);
     pop();
 
-    
-  }
-  if (screen == "pause"){
-    push()
-    textFont(titleFont)
-    
-    push()
-    textAlign(CENTER)
-    
-    textSize(40)
-    fill(191, 64, 191)
-    stroke(0)
-    strokeWeight(3)
-    text("Paused", 275, 50)
-    pop()
-
-    push()
-    textAlign(CENTER)
-    rectMode(CENTER)
+    push();
+    textAlign(CENTER);
+    rectMode(CENTER);
     fill(50, 205, 50);
-    if(mouseX >= 205 && mouseX <= 347 && mouseY >= 176 && mouseY <= 225 && screen == "pause"){
+    if (
+      mouseX >= 205 &&
+      mouseX <= 347 &&
+      mouseY >= 176 &&
+      mouseY <= 225 &&
+      screen == "pause"
+    ) {
       fill(34, 139, 34);
     }
     rect(275, 200, 140, 50);
     fill(0);
     textSize(15);
     text("Resume", 275, 210);
-    pop()
+    pop();
 
-    push()
-    textAlign(CENTER)
-    rectMode(CENTER)
-    fill(255,0,0)
-    if(mouseX >= 205 && mouseX <= 347 && mouseY >= 276 && mouseY <= 325 && screen == "pause"){
-      fill(130,0,0)
+    push();
+    textAlign(CENTER);
+    rectMode(CENTER);
+    fill(255, 0, 0);
+    if (
+      mouseX >= 205 &&
+      mouseX <= 347 &&
+      mouseY >= 276 &&
+      mouseY <= 325 &&
+      screen == "pause"
+    ) {
+      fill(130, 0, 0);
     }
     rect(275, 300, 140, 50);
     fill(0);
     textSize(15);
     text("Exit", 275, 310);
-    pop()
-    pop()
+    pop();
+    pop();
   }
 
-  //text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
+  text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
 }
 
 function mouseReleased() {
@@ -468,7 +568,7 @@ function mousePressed() {
     screen == "start"
   )
     screen = "game";
-  
+
   if (
     ((mouseX >= 430 && mouseX <= 520 && mouseY >= 480 && mouseY <= 503) ||
       (mouseX >= 450 && mouseX <= 500 && mouseY >= 480 && mouseY <= 560)) &&
@@ -512,7 +612,7 @@ function mousePressed() {
     mouseY >= 302 &&
     mouseY <= 341 &&
     screen == "character"
-  ){
+  ) {
     character = "default";
     screen = "start";
   }
@@ -523,7 +623,7 @@ function mousePressed() {
     mouseY >= 552 &&
     mouseY <= 591 &&
     screen == "character"
-  ){
+  ) {
     character = "raul";
     screen = "start";
   }
@@ -534,9 +634,9 @@ function mousePressed() {
     mouseY >= 552 &&
     mouseY <= 591 &&
     screen == "character"
-  ){
-    character = "tire"
-    screen = "start"
+  ) {
+    character = "tire";
+    screen = "start";
   }
 
   if (
@@ -545,9 +645,9 @@ function mousePressed() {
     mouseY >= 552 &&
     mouseY <= 591 &&
     screen == "character"
-  ){
-    character = "dog"
-    screen = "start"
+  ) {
+    character = "dog";
+    screen = "start";
   }
 
   if (
@@ -556,11 +656,33 @@ function mousePressed() {
     mouseY >= 552 &&
     mouseY <= 591 &&
     screen == "character"
-  ){
+  ) {
     character = "sponge";
     screen = "start";
   }
-  
+
+  // char page 1 to char page 2
+  if (
+    mouseX >= 500 &&
+    mouseX <= 520 &&
+    mouseY >= 345 &&
+    mouseY <= 395 &&
+    screen == "character"
+  ) {
+    screen = "character2";
+  }
+
+  // char page 2 to char page 1
+  if (
+    mouseX >= 55 &&
+    mouseX <= 75 &&
+    mouseY >= 345 &&
+    mouseY <= 395 &&
+    screen == "character2"
+  ) {
+    screen = "character";
+  }
+
   if (
     mouseX >= 225 &&
     mouseX <= 325 &&
@@ -573,18 +695,39 @@ function mousePressed() {
     score = 0;
   }
 
-  if(mouseX >= 501 && mouseX <= 541 && mouseY >= 10 && mouseY <= 35 && screen == "game"){
-    screen = "pause"
+  if (
+    mouseX >= 501 &&
+    mouseX <= 541 &&
+    mouseY >= 10 &&
+    mouseY <= 35 &&
+    screen == "game"
+  ) {
+    screen = "pause";
   }
 
-  if(mouseX >= 205 && mouseX <= 347 && mouseY >= 176 && mouseY <= 225 && screen == "pause"){
-    screen = "game"
+  if (
+    mouseX >= 205 &&
+    mouseX <= 347 &&
+    mouseY >= 176 &&
+    mouseY <= 225 &&
+    screen == "pause"
+  ) {
+    screen = "game";
   }
-  
-  if(mouseX >= 205 && mouseX <= 347 && mouseY >= 276 && mouseY <= 325 && screen == "pause"){
-    screen = "start"
+
+  if (
+    mouseX >= 205 &&
+    mouseX <= 347 &&
+    mouseY >= 276 &&
+    mouseY <= 325 &&
+    screen == "pause"
+  ) {
+    screen = "start";
     lives = 3;
     score = 0;
+    gameStarted = false;
+    startTime = millis();
+    countdown = 4.5;
+    goDuration = 0;
   }
 }
-
