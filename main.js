@@ -1,6 +1,6 @@
 let basket;
-let screen = "start";
-let character = "default";
+let screen = "game";
+let character = "abounaD";
 let tree;
 let grass;
 let titleFont;
@@ -9,13 +9,14 @@ let userTable;
 let fallingEmojis = [];
 let lastEmojiSpawn = 0;
 let score = 0;
+topScore = 0;
 let char;
 let dog, cat, angelina, tim, raul, sponge, dora, tire; // characters
 let gameStartTimer = 0;
-let abouna_g_pic;
-let abouna_d_pic;
-let abouna_g;
-let abouna_d;
+let abounaGDisplay;
+let abounaDDisplay;
+let abouna_g_game;
+let abouna_d_game;
 let lives = 3;
 
 let startTime;
@@ -26,8 +27,10 @@ let gameStarted = false;
 function preload() {
   tree = loadImage("mahraganTree.png");
   grass = loadImage("mahraganGrass.png");
-  abouna_g_pic = loadImage("abouna_g.png");
-  abouna_d_pic = loadImage("abouna_d.png");
+  abouna_g_game_pic = loadImage("abouna_g_game.png");
+  abouna_d_game_pic = loadImage("abouna_d_game.png");
+  abounaDavidStanding = loadImage("abounaDavidStanding.png");
+  abounaGregStanding = loadImage("abounaGregStanding.png");
   titleFont = loadFont("Assets/PressStart2P-Regular.ttf");
 }
 
@@ -44,8 +47,10 @@ function setup() {
   basket = new Basket(178, 280);
   char = new Character(0, 0);
   dog = new Dog(205, 280, 0.45);
-  abouna_g = new Abouna(abouna_g_pic, 50, -120, 300, 700, 1);
-  abouna_d = new Abouna(abouna_d_pic, 300, 100, 300, 400, 0.8);
+  abouna_g_game = new Abouna(abouna_g_game_pic, 50, -120, 300, 700, 1);
+  abouna_d_game = new Abouna(abouna_d_game_pic, 300, 100, 300, 400, 0.8);
+  abounaDDisplay = new Abouna(abounaDavidStanding,275,145,300,380,0.7);
+  abounaGDisplay = new Abouna(abounaGregStanding, 85, 120, 225, 300, 1);
   startTime = millis();
 }
 
@@ -70,7 +75,9 @@ function draw() {
     dora = new Dora(60, 420);
     basket = new Basket(178, 280);
     dog = new Dog(205, 280, 0.45);
-
+    abouna_d_game = new Abouna(abouna_d_game_pic,290,100,300,380, 0.84);
+    abouna_g_game = new Abouna(abouna_g_game_pic, 85, 120, 225, 300, 1);
+    
     fallingEmojis = [];
 
     //draw play button
@@ -120,7 +127,6 @@ function draw() {
     charDisplay();
     pop();
   }
-
   if (screen == "game") {
     image(tree, 0, 0, 550, 775);
     image(grass, 0, 400, 650, 200);
@@ -348,7 +354,7 @@ function draw() {
     rect(59, 300, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 97, 325);
+    text("Select", 97, 320);
 
     fill(50, 205, 50);
     if (
@@ -362,7 +368,7 @@ function draw() {
     rect(169, 300, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 207, 325);
+    text("Select", 207, 320);
 
     fill(50, 205, 50);
     if (
@@ -376,7 +382,7 @@ function draw() {
     rect(279, 300, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 317, 325);
+    text("Select", 317, 320);
 
     fill(50, 205, 50);
     if (
@@ -390,7 +396,7 @@ function draw() {
     rect(389, 300, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 427, 325);
+    text("Select", 427, 320);
 
     fill(50, 205, 50);
     if (
@@ -404,7 +410,7 @@ function draw() {
     rect(59, 550, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 97, 575);
+    text("Select", 97, 570);
 
     fill(50, 205, 50);
     if (
@@ -418,7 +424,7 @@ function draw() {
     rect(169, 550, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 207, 575);
+    text("Select", 207, 570);
 
     fill(50, 205, 50);
     if (
@@ -432,7 +438,7 @@ function draw() {
     rect(279, 550, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 317, 575);
+    text("Select", 317, 570);
 
     fill(50, 205, 50);
     if (
@@ -446,51 +452,68 @@ function draw() {
     rect(389, 550, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 427, 575);
+    text("Select", 427, 570);
     // pop();
 
     // next page button on characters screen
     // Check hover
-    if (mouseX > 500 && mouseX < 520 && mouseY > 345 && mouseY < 395) {
-      fill(180); // hover color
-    } else {
-      fill(200); // normal color
+    fill(200);
+    if (mouseX > 502 && mouseX < 541 && mouseY > 245 && mouseY < 315) {
+      fill(150); // hover color
     }
-    // Draw button rectangle
-    rect(500, 345, 20, 50, 10);
 
-    // Button text
+    push();
+    rectMode(CENTER);
+    rect(520, width / 2, 40, 70);
+    pop();
+
     fill(0);
+    textSize(15);
     textAlign(CENTER, CENTER);
-    text(">", 500 + 20 / 2, 345 + 50 / 2);
+    text(">", 520, width / 2);
   }
-
   if (screen == "character2") {
+    push();
+    textSize(20);
+    textFont(titleFont);
     // first char page button on character2 screen
     // Check hover
-    if (mouseX > 55 && mouseX < 75 && mouseY > 345 && mouseY < 395) {
-      fill(180); // hover color
+    if (mouseX > 16 && mouseX < 56 && mouseY > 244 && mouseY < 314) {
+      fill(150); // hover color
     } else {
       fill(200); // normal color
     }
-    rect(55, 345, 20, 50, 10);
+    push();
+    rectMode(CENTER);
+    rect(35, width / 2, 40, 70);
+    pop();
+
     fill(0);
     textAlign(CENTER, CENTER);
-    text("<", 55 + 20 / 2, 345 + 50 / 2);
+    textSize(15);
+    text("<", 35, width / 2);
 
     // Show abounas
-    abouna_g.display();
-    abouna_d.display();
+    abounaDDisplay.display();
+    abounaGDisplay.display();
 
     // push();
     fill(50, 205, 50);
-    if (mouseX >= 150 && mouseX <= 250 && mouseY >= 440 && mouseY <= 480)
+    if (mouseX >= 151 && mouseX <= 251 && mouseY >= 440 && mouseY <= 480)
       fill(34, 139, 34);
     rect(150, 440, 100, 40);
     fill(0);
     textSize(10);
-    text("Select", 250 / 2, 480 / 2);
-    // pop();
+    text("Select", 200, 460);
+
+    fill(50, 205, 50);
+    if (mouseX >= 366 && mouseX <= 466 && mouseY >= 440 && mouseY <= 480)
+      fill(34, 139, 34);
+    rect(365, 440, 100, 40);
+    fill(0);
+    textSize(10);
+    text("Select", 415, 460);
+    pop();
   }
   if (screen == "pause") {
     push();
@@ -546,7 +569,10 @@ function draw() {
     pop();
   }
 
-  text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
+  // push();
+  // textFont("Arial");
+  // text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
+  // pop();
 }
 
 function mouseReleased() {
@@ -663,21 +689,31 @@ function mousePressed() {
 
   // char page 1 to char page 2
   if (
-    mouseX >= 500 &&
-    mouseX <= 520 &&
-    mouseY >= 345 &&
-    mouseY <= 395 &&
+    mouseX > 502 &&
+    mouseX < 541 &&
+    mouseY > 245 &&
+    mouseY < 315 &&
     screen == "character"
   ) {
     screen = "character2";
   }
 
+  if(mouseX >= 151 && mouseX <= 251 && mouseY >= 440 && mouseY <= 480 && screen == "character2"){
+    character = "abounaG";
+    screen = "start";
+  }
+
+  if (mouseX >= 366 && mouseX <= 466 && mouseY >= 440 && mouseY <= 480 && screen == "character2"){
+    character = "abounaD";
+    screen = "start";
+  }
+
   // char page 2 to char page 1
   if (
-    mouseX >= 55 &&
-    mouseX <= 75 &&
-    mouseY >= 345 &&
-    mouseY <= 395 &&
+    mouseX > 16 &&
+    mouseX < 56 &&
+    mouseY > 244 &&
+    mouseY < 314 &&
     screen == "character2"
   ) {
     screen = "character";

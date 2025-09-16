@@ -522,18 +522,41 @@ class Abouna {
       console.log("Image missing!");
     }
   }
-  move() {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -188) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -188)
-    ) {
-      this.x -= dx;
+  move(dx) {
+    if (character == "abounaD") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= 25) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= 25)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 570) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 570)
+      ) {
+        this.x += dx;
+      }
     }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 300) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 300)
-    ) {
-      this.x += dx;
+
+    if (character == "abounaG") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -188) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -188)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 300) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 300)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -1268,6 +1291,20 @@ class Character {
       tire.draw();
       tire.move(10.4);
       pop();
+    } else if (character == "abounaG") {
+      push();
+      scale(1.2);
+      translate(-100, -100);
+      abouna_g_game.display();
+      abouna_g_game.move(10);
+      pop();
+    } else if (character == "abounaD") {
+      push();
+      scale(0.9);
+      translate(-100, 300);
+      abouna_d_game.display();
+      abouna_d_game.move(11.1);
+      pop()
     }
 
     pop();
@@ -1307,5 +1344,16 @@ function charDisplay() {
     translate(-105, -20);
     dog.draw();
     pop();
+  } else if (character == "abounaG") {
+    push();
+    scale(1);
+    translate(80, 275);
+    abounaGDisplay.display();
+    pop();
+  } else if (character == "abounaD") {
+    push();
+    scale(1.05);
+    translate(-140, 250);
+    abounaDDisplay.display();
   }
 }
