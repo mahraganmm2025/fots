@@ -66,17 +66,22 @@ class ANGELINA_CH {
     pop();
   }
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -240) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -240)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 250) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 250)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -240) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -240)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 250) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 250)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -162,17 +167,22 @@ class Raul {
     pop();
   }
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -140) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -140)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 350) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 350)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -140) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -140)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 350) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 350)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -268,17 +278,22 @@ class Cat {
     pop();
   }
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -150) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -150)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 460) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 460)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -150) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -150)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 460) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 460)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -332,17 +347,22 @@ class CanadianTire {
     fill(0);
   }
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -137) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -137)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 375) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 375)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -137) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -137)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 375) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 375)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -393,17 +413,22 @@ class TimHortonsCookie {
   }
 
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -128) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -128)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 360) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 360)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -128) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -128)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 360) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 360)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -489,20 +514,25 @@ class Dora {
   }
 
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -188) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -188)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 300) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 300)
-    ) {
-      this.x += dx;
-    }
-    if (screen == "gameover") {
-      this.x = 0;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -188) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -188)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 300) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 300)
+      ) {
+        this.x += dx;
+      }
+      if (screen == "gameover") {
+        this.x = 0;
+      }
     }
   }
 }
@@ -523,7 +553,7 @@ class Abouna {
     }
   }
   move(dx) {
-    if (character == "abounaD") {
+    if (character == "abounaD" && screen == "game") {
       if (
         (keyIsDown(LEFT_ARROW) && this.x >= 25) ||
         (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= 25)
@@ -541,7 +571,7 @@ class Abouna {
       }
     }
 
-    if (character == "abounaG") {
+    if (character == "abounaG" && screen == "game") {
       if (
         (keyIsDown(LEFT_ARROW) && this.x >= -188) ||
         (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -188)
@@ -612,21 +642,28 @@ class Basket {
   }
 
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -70) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -70)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 420) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 420)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -70) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -70)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 420) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 420)
+      ) {
+        this.x += dx;
+      }
     }
   }
   ctrlChar() {
-    this.move(10);
+    if (screen == "game") {
+      this.move(10);
+    }
   }
 }
 class Title {
@@ -1053,17 +1090,22 @@ class SpongeBob {
     pop();
   }
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -298) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -298)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 190) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 190)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -298) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -298)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 190) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 190)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -1169,17 +1211,22 @@ class Dog {
     pop();
   }
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= 30) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= 30)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 380) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 380)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= 30) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= 30)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 380) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 380)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -1304,7 +1351,7 @@ class Character {
       translate(-100, 300);
       abouna_d_game.display();
       abouna_d_game.move(11.1);
-      pop()
+      pop();
     }
 
     pop();

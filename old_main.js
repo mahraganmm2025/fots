@@ -9,28 +9,25 @@ let userTable;
 let fallingEmojis = [];
 let lastEmojiSpawn = 0;
 let score = 0;
-let topScore = 10;
 let char;
 let dog, cat, angelina, tim, raul, sponge, dora, tire; // characters
 let gameStartTimer = 0;
-let abounaGDisplay;
-let abounaDDisplay;
-let abouna_g_game;
-let abouna_d_game;
+let abouna_g_pic;
+let abouna_d_pic;
+let abouna_g;
+let abouna_d;
 let lives = 3;
 
-let startTime = null;
-let countdown = 3;
-
+let startTime;
+let countdown = 4;
+let goDuration = 0;
 let gameStarted = false;
 
 function preload() {
   tree = loadImage("mahraganTree.png");
   grass = loadImage("mahraganGrass.png");
-  abouna_g_game_pic = loadImage("abouna_g_game.png");
-  abouna_d_game_pic = loadImage("abouna_d_game.png");
-  abounaDavidStanding = loadImage("abounaDavidStanding.png");
-  abounaGregStanding = loadImage("abounaGregStanding.png");
+  abouna_g_pic = loadImage("abouna_g.png");
+  abouna_d_pic = loadImage("abouna_d.png");
   titleFont = loadFont("Assets/PressStart2P-Regular.ttf");
 }
 
@@ -47,10 +44,9 @@ function setup() {
   basket = new Basket(178, 280);
   char = new Character(0, 0);
   dog = new Dog(205, 280, 0.45);
-  abouna_g_game = new Abouna(abouna_g_game_pic, 50, -120, 300, 700, 1);
-  abouna_d_game = new Abouna(abouna_d_game_pic, 300, 100, 300, 400, 0.8);
-  abounaDDisplay = new Abouna(abounaDavidStanding, 275, 145, 300, 380, 0.7);
-  abounaGDisplay = new Abouna(abounaGregStanding, 85, 120, 225, 300, 1);
+  // abouna_g = new Abouna(abouna_g_pic, 50, -120, 300, 700, 1);
+  // abouna_d = new Abouna(abouna_d_pic, 300, 100, 300, 400, 0.8);
+  startTime = millis();
 }
 
 function draw() {
@@ -65,13 +61,6 @@ function draw() {
     //draw title
     title.drawTitle();
 
-    if(topScore > 0){
-      push();
-      textSize(15);
-      text("Top Score: " + topScore, width / 2, 450);
-      pop();
-    }
-
     angelina = new ANGELINA_CH(5, 400);
     raul = new Raul(108, 370);
     sponge = new SpongeBob(-50, 280, 1.55);
@@ -81,8 +70,6 @@ function draw() {
     dora = new Dora(60, 420);
     basket = new Basket(178, 280);
     dog = new Dog(205, 280, 0.45);
-    abouna_d_game = new Abouna(abouna_d_game_pic, 290, 100, 300, 380, 0.84);
-    abouna_g_game = new Abouna(abouna_g_game_pic, 85, 120, 225, 300, 1);
 
     fallingEmojis = [];
 
@@ -133,43 +120,7 @@ function draw() {
     charDisplay();
     pop();
   }
-  if(screen == "pregame"){
 
-
-    if (startTime === null){
-      startTime = millis()
-    }
-
-
-    image(tree, 0, 0, 550, 775);
-    image(grass, 0, 400, 650, 200);
-
-    //draw person
-    char.draw();
-    basket.draw();
-    basket.ctrlChar();
-
-
-    let elapsed = int((millis() - startTime) / 1000);
-
-    push()
-    fill(255,0,0)
-    textSize(40)
-    textFont(titleFont)
-    textAlign(CENTER)
-    if (elapsed < 3) {
-      text(countdown - elapsed, width / 2, height / 2);
-    } 
-    else if (elapsed < 4) {
-      text("GO!", width / 2, height / 2);
-    } 
-    else {
-      screen = "game";
-      startTime = null;
-    }
-    pop()
-    
-  }
   if (screen == "game") {
     image(tree, 0, 0, 550, 775);
     image(grass, 0, 400, 650, 200);
@@ -192,7 +143,7 @@ function draw() {
 
       // Check collision with basket
       if (fallingEmojis[i].checkCollision(basket)) {
-        //print(fallingEmojis);
+        print(fallingEmojis);
         if (
           fallingEmojis[i].emoji == "💣" ||
           fallingEmojis[i].emoji == "💔" ||
@@ -266,10 +217,32 @@ function draw() {
 
     pop();
 
-    if (lives == 0) {
-      if(score > topScore){
-        topScore = score;
+    let elapsed = (millis() - startTime) / 1000;
+
+    if (!gameStarted) {
+      // how many seconds left in countdown
+      let remaining = countdown - ceil(elapsed);
+
+      if (remaining > 0 && remaining <= 3) {
+        push();
+        textSize(50);
+        fill(255, 0, 0);
+        textAlign(CENTER, CENTER);
+        text(ceil(remaining), width / 2, height / 2); // 3..2..1
+        pop();
+      } else if (elapsed < countdown + goDuration) {
+        push();
+        fill(255, 0, 0);
+        textSize(50);
+        textAlign(CENTER, CENTER);
+        text("GO!", width / 2, height / 2); // show "GO!" for 2s
+        pop();
+      } else {
+        gameStarted = true; // now switch to game
       }
+    }
+
+    if (lives == 0) {
       screen = "gameover";
     }
   }
@@ -303,10 +276,11 @@ function draw() {
     pop();
 
     gameStarted = false;
-    countdown = 3;
+    startTime = millis();
+    countdown = 4;
+    goDuration = 1;
   }
   if (screen == "character") {
-    push();
     push();
     textAlign(CENTER);
     textFont(titleFont);
@@ -374,7 +348,7 @@ function draw() {
     rect(59, 300, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 97, 320);
+    text("Select", 97, 325);
 
     fill(50, 205, 50);
     if (
@@ -388,7 +362,7 @@ function draw() {
     rect(169, 300, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 207, 320);
+    text("Select", 207, 325);
 
     fill(50, 205, 50);
     if (
@@ -402,7 +376,7 @@ function draw() {
     rect(279, 300, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 317, 320);
+    text("Select", 317, 325);
 
     fill(50, 205, 50);
     if (
@@ -416,7 +390,7 @@ function draw() {
     rect(389, 300, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 427, 320);
+    text("Select", 427, 325);
 
     fill(50, 205, 50);
     if (
@@ -430,7 +404,7 @@ function draw() {
     rect(59, 550, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 97, 570);
+    text("Select", 97, 575);
 
     fill(50, 205, 50);
     if (
@@ -444,7 +418,7 @@ function draw() {
     rect(169, 550, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 207, 570);
+    text("Select", 207, 575);
 
     fill(50, 205, 50);
     if (
@@ -458,7 +432,7 @@ function draw() {
     rect(279, 550, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 317, 570);
+    text("Select", 317, 575);
 
     fill(50, 205, 50);
     if (
@@ -472,68 +446,51 @@ function draw() {
     rect(389, 550, 75, 40);
     fill(0);
     textSize(10);
-    text("Select", 427, 570);
+    text("Select", 427, 575);
     // pop();
-    if(topScore >= 500){
-    fill(200);
-    if (mouseX > 502 && mouseX < 541 && mouseY > 245 && mouseY < 315) {
-      fill(150); // hover color
-    }
 
-    push();
-    rectMode(CENTER);
-    rect(520, width / 2, 40, 70);
-    pop();
-
-    fill(0);
-    textSize(15);
-    textAlign(CENTER, CENTER);
-    text(">", 520, width / 2);
-    }
-    pop();
-  }
-  if (screen == "character2") {
-    push();
-    textSize(20);
-    textFont(titleFont);
-    // first char page button on character2 screen
+    // next page button on characters screen
     // Check hover
-    if (mouseX > 16 && mouseX < 56 && mouseY > 244 && mouseY < 314) {
-      fill(150); // hover color
+    if (mouseX > 500 && mouseX < 520 && mouseY > 345 && mouseY < 395) {
+      fill(180); // hover color
     } else {
       fill(200); // normal color
     }
-    push();
-    rectMode(CENTER);
-    rect(35, width / 2, 40, 70);
-    pop();
+    // Draw button rectangle
+    rect(500, 345, 20, 50, 10);
 
+    // Button text
     fill(0);
     textAlign(CENTER, CENTER);
-    textSize(15);
-    text("<", 35, width / 2);
+    text(">", 500 + 20 / 2, 345 + 50 / 2);
+  }
+
+  if (screen == "character2") {
+    // first char page button on character2 screen
+    // Check hover
+    if (mouseX > 55 && mouseX < 75 && mouseY > 345 && mouseY < 395) {
+      fill(180); // hover color
+    } else {
+      fill(200); // normal color
+    }
+    rect(55, 345, 20, 50, 10);
+    fill(0);
+    textAlign(CENTER, CENTER);
+    text("<", 55 + 20 / 2, 345 + 50 / 2);
 
     // Show abounas
-    abounaDDisplay.display();
-    abounaGDisplay.display();
+    // abouna_g.display();
+    // abouna_d.display();
 
     // push();
-    fill(50, 205, 50);
-    if (mouseX >= 151 && mouseX <= 251 && mouseY >= 440 && mouseY <= 480)
-      fill(34, 139, 34);
-    rect(150, 440, 100, 40);
-    fill(0);
-    textSize(10);
-    text("Select", 200, 460);
-
-    fill(50, 205, 50);
-    if (mouseX >= 366 && mouseX <= 466 && mouseY >= 440 && mouseY <= 480)
-      fill(34, 139, 34);
-    rect(365, 440, 100, 40);
-    fill(0);
-    textSize(10);
-    text("Select", 415, 460);
-    pop();
+    // fill(50, 205, 50);
+    // if (mouseX >= 150 && mouseX <= 250 && mouseY >= 440 && mouseY <= 480)
+    //   fill(34, 139, 34);
+    // rect(150, 440, 100, 40);
+    // fill(0);
+    // textSize(10);
+    // text("Select", 250 / 2, 480 / 2);
+    // pop();
   }
   if (screen == "pause") {
     push();
@@ -589,12 +546,19 @@ function draw() {
     pop();
   }
 
-  // push();
-  // textFont("Arial");
   // text("(" + mouseX + ", " + mouseY + " )", mouseX, mouseY);
-  // pop();
 }
 
+function mouseReleased() {
+  if (
+    mouseX >= 228 &&
+    mouseX <= 328 &&
+    mouseY >= 302 &&
+    mouseY <= 352 &&
+    screen == "title"
+  )
+    screen = "start";
+}
 function mousePressed() {
   if (
     mouseX >= 178 &&
@@ -603,7 +567,7 @@ function mousePressed() {
     mouseY <= 532 &&
     screen == "start"
   )
-    screen = "pregame";
+    screen = "game";
 
   if (
     ((mouseX >= 430 && mouseX <= 520 && mouseY >= 480 && mouseY <= 503) ||
@@ -699,44 +663,21 @@ function mousePressed() {
 
   // char page 1 to char page 2
   if (
-    mouseX > 502 &&
-    mouseX < 541 &&
-    mouseY > 245 &&
-    mouseY < 315 &&
-    screen == "character" &&
-    topScore >= 500
+    mouseX >= 500 &&
+    mouseX <= 520 &&
+    mouseY >= 345 &&
+    mouseY <= 395 &&
+    screen == "character"
   ) {
     screen = "character2";
   }
 
-  if (
-    mouseX >= 151 &&
-    mouseX <= 251 &&
-    mouseY >= 440 &&
-    mouseY <= 480 &&
-    screen == "character2"
-  ) {
-    character = "abounaG";
-    screen = "start";
-  }
-
-  if (
-    mouseX >= 366 &&
-    mouseX <= 466 &&
-    mouseY >= 440 &&
-    mouseY <= 480 &&
-    screen == "character2"
-  ) {
-    character = "abounaD";
-    screen = "start";
-  }
-
   // char page 2 to char page 1
   if (
-    mouseX > 16 &&
-    mouseX < 56 &&
-    mouseY > 244 &&
-    mouseY < 314 &&
+    mouseX >= 55 &&
+    mouseX <= 75 &&
+    mouseY >= 345 &&
+    mouseY <= 395 &&
     screen == "character2"
   ) {
     screen = "character";
@@ -784,7 +725,9 @@ function mousePressed() {
     screen = "start";
     lives = 3;
     score = 0;
-    // gameStarted = false;
-    countdown = 3;
+    gameStarted = false;
+    startTime = millis();
+    countdown = 4.5;
+    goDuration = 0;
   }
 }
