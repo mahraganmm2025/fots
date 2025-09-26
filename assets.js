@@ -6,10 +6,10 @@ class ANGELINA_CH {
   }
   draw() {
     push();
-    if (screen == "game") {
+    if (screen == "game" || screen == "pregame") {
       translate(this.x, this.y); // to move the whole character
     } else {
-      translate(0, 400);
+      translate(-2, 400);
     }
     scale(this.s);
 
@@ -66,17 +66,22 @@ class ANGELINA_CH {
     pop();
   }
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -240) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -240)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 250) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 250)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -240) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -240)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 250) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 250)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -87,7 +92,7 @@ class Raul {
     this.s = s;
   }
   draw() {
-    if (screen == "game") {
+    if (screen == "game" || screen == "pregame") {
       translate(this.x, this.y); // to move the whole character
     } else {
       translate(50, 450);
@@ -162,17 +167,22 @@ class Raul {
     pop();
   }
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -140) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -140)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 350) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 350)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -140) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -140)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 350) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 350)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -183,7 +193,7 @@ class Cat {
     this.s = s;
   }
   draw() {
-    if (screen == "game") {
+    if (screen == "game"  || screen == "pregame") {
       scale(0.8);
       translate(this.x + 40, this.y + 80); // to move the whole character
     } else if (screen == "character") {
@@ -268,17 +278,22 @@ class Cat {
     pop();
   }
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -150) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -150)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 460) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 460)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -150) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -150)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 460) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 460)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -290,7 +305,7 @@ class CanadianTire {
   }
 
   draw() {
-    if (screen == "game") {
+    if (screen == "game"  || screen == "pregame") {
       scale(0.8);
       translate(this.x + 40, this.y + 80); // to move the whole character
     } else if (screen == "character") {
@@ -332,17 +347,22 @@ class CanadianTire {
     fill(0);
   }
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -137) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -137)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 375) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 375)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -137) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -137)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 375) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 375)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -393,17 +413,22 @@ class TimHortonsCookie {
   }
 
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -128) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -128)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 360) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 360)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -128) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -128)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 360) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 360)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -415,7 +440,7 @@ class Dora {
   }
   draw() {
     push();
-    if (screen == "game") {
+    if (screen == "game"  || screen == "pregame") {
       translate(this.x, this.y); // to move the whole character
     } else {
       translate(60, 425);
@@ -489,20 +514,25 @@ class Dora {
   }
 
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -188) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -188)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 300) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 300)
-    ) {
-      this.x += dx;
-    }
-    if (screen == "gameover") {
-      this.x = 0;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -188) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -188)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 300) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 300)
+      ) {
+        this.x += dx;
+      }
+      if (screen == "gameover") {
+        this.x = 0;
+      }
     }
   }
 }
@@ -522,18 +552,41 @@ class Abouna {
       console.log("Image missing!");
     }
   }
-  move() {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -188) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -188)
-    ) {
-      this.x -= dx;
+  move(dx) {
+    if (character == "abounaD" && screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= 25) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= 25)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 570) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 570)
+      ) {
+        this.x += dx;
+      }
     }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 300) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 300)
-    ) {
-      this.x += dx;
+
+    if (character == "abounaG" && screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= 15) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= 15)
+      ) {
+        this.x -= (dx-1.65);
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 425) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 425)
+      ) {
+        this.x += (dx-1.65);
+      }
     }
   }
 }
@@ -552,7 +605,7 @@ class Basket {
     //outer basket
     fill(99, 70, 51);
     rect(100, 200, 200, 75);
-    arc(200, 275, 200, 100, radians(0), radians(180));
+    arc(200, 274, 200, 100, radians(0), radians(180));
 
     //inner basket/rim
     fill(56, 41, 31);
@@ -589,21 +642,28 @@ class Basket {
   }
 
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -70) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -70)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 420) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 420)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -70) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -70)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 420) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 420)
+      ) {
+        this.x += dx;
+      }
     }
   }
   ctrlChar() {
-    this.move(10);
+    if (screen == "game") {
+      this.move(10);
+    }
   }
 }
 class Title {
@@ -1030,17 +1090,22 @@ class SpongeBob {
     pop();
   }
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= -298) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -298)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 190) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 190)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= -298) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -298)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 190) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 190)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -1146,17 +1211,22 @@ class Dog {
     pop();
   }
   move(dx) {
-    if (
-      (keyIsDown(LEFT_ARROW) && this.x >= 30) ||
-      (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= 30)
-    ) {
-      this.x -= dx;
-    }
-    if (
-      (keyIsDown(RIGHT_ARROW) && this.x <= 380) ||
-      (mouseIsPressed && mouseX > width / 2 && mouseX < width && this.x <= 380)
-    ) {
-      this.x += dx;
+    if (screen == "game") {
+      if (
+        (keyIsDown(LEFT_ARROW) && this.x >= 30) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= 30)
+      ) {
+        this.x -= dx;
+      }
+      if (
+        (keyIsDown(RIGHT_ARROW) && this.x <= 380) ||
+        (mouseIsPressed &&
+          mouseX > width / 2 &&
+          mouseX < width &&
+          this.x <= 380)
+      ) {
+        this.x += dx;
+      }
     }
   }
 }
@@ -1268,6 +1338,20 @@ class Character {
       tire.draw();
       tire.move(10.4);
       pop();
+    } else if (character == "abounaG") {
+      push();
+      scale(1.2);
+      translate(-100, -100);
+      abouna_g_game.display();
+      abouna_g_game.move(10);
+      pop();
+    } else if (character == "abounaD") {
+      push();
+      scale(0.9);
+      translate(-100, 300);
+      abouna_d_game.display();
+      abouna_d_game.move(11.1);
+      pop();
     }
 
     pop();
@@ -1307,5 +1391,16 @@ function charDisplay() {
     translate(-105, -20);
     dog.draw();
     pop();
+  } else if (character == "abounaG") {
+    push();
+    scale(1);
+    translate(80, 275);
+    abounaGDisplay.display();
+    pop();
+  } else if (character == "abounaD") {
+    push();
+    scale(1.05);
+    translate(-140, 250);
+    abounaDDisplay.display();
   }
 }
