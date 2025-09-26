@@ -6,10 +6,10 @@ class ANGELINA_CH {
   }
   draw() {
     push();
-    if (screen == "game") {
+    if (screen == "game" || screen == "pregame") {
       translate(this.x, this.y); // to move the whole character
     } else {
-      translate(0, 400);
+      translate(-2, 400);
     }
     scale(this.s);
 
@@ -92,7 +92,7 @@ class Raul {
     this.s = s;
   }
   draw() {
-    if (screen == "game") {
+    if (screen == "game" || screen == "pregame") {
       translate(this.x, this.y); // to move the whole character
     } else {
       translate(50, 450);
@@ -193,7 +193,7 @@ class Cat {
     this.s = s;
   }
   draw() {
-    if (screen == "game") {
+    if (screen == "game"  || screen == "pregame") {
       scale(0.8);
       translate(this.x + 40, this.y + 80); // to move the whole character
     } else if (screen == "character") {
@@ -305,7 +305,7 @@ class CanadianTire {
   }
 
   draw() {
-    if (screen == "game") {
+    if (screen == "game"  || screen == "pregame") {
       scale(0.8);
       translate(this.x + 40, this.y + 80); // to move the whole character
     } else if (screen == "character") {
@@ -440,7 +440,7 @@ class Dora {
   }
   draw() {
     push();
-    if (screen == "game") {
+    if (screen == "game"  || screen == "pregame") {
       translate(this.x, this.y); // to move the whole character
     } else {
       translate(60, 425);
@@ -573,19 +573,19 @@ class Abouna {
 
     if (character == "abounaG" && screen == "game") {
       if (
-        (keyIsDown(LEFT_ARROW) && this.x >= -188) ||
-        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= -188)
+        (keyIsDown(LEFT_ARROW) && this.x >= 15) ||
+        (mouseIsPressed && mouseX > 0 && mouseX < width / 2 && this.x >= 15)
       ) {
-        this.x -= dx;
+        this.x -= (dx-1.65);
       }
       if (
-        (keyIsDown(RIGHT_ARROW) && this.x <= 300) ||
+        (keyIsDown(RIGHT_ARROW) && this.x <= 425) ||
         (mouseIsPressed &&
           mouseX > width / 2 &&
           mouseX < width &&
-          this.x <= 300)
+          this.x <= 425)
       ) {
-        this.x += dx;
+        this.x += (dx-1.65);
       }
     }
   }
@@ -605,7 +605,7 @@ class Basket {
     //outer basket
     fill(99, 70, 51);
     rect(100, 200, 200, 75);
-    arc(200, 275, 200, 100, radians(0), radians(180));
+    arc(200, 274, 200, 100, radians(0), radians(180));
 
     //inner basket/rim
     fill(56, 41, 31);

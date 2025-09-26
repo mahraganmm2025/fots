@@ -9,7 +9,7 @@ let userTable;
 let fallingEmojis = [];
 let lastEmojiSpawn = 0;
 let score = 0;
-let topScore = 10;
+let topScore = 0; //<---- change if you want access to abounas (500 minimum)
 let char;
 let dog, cat, angelina, tim, raul, sponge, dora, tire; // characters
 let gameStartTimer = 0;
@@ -47,10 +47,10 @@ function setup() {
   basket = new Basket(178, 280);
   char = new Character(0, 0);
   dog = new Dog(205, 280, 0.45);
-  abouna_g_game = new Abouna(abouna_g_game_pic, 50, -120, 300, 700, 1);
+  abouna_g_game = new Abouna(abouna_g_game_pic, 220, 240, 300, 700, 0.75);
   abouna_d_game = new Abouna(abouna_d_game_pic, 300, 100, 300, 400, 0.8);
-  abounaDDisplay = new Abouna(abounaDavidStanding, 275, 145, 300, 380, 0.7);
-  abounaGDisplay = new Abouna(abounaGregStanding, 85, 120, 225, 300, 1);
+  abounaDDisplay = new Abouna(abounaDavidStanding, 275, 120, 300, 380, 0.7);
+  abounaGDisplay = new Abouna(abounaGregStanding, 85, 100, 225, 300, 1);
 }
 
 function draw() {
@@ -65,7 +65,7 @@ function draw() {
     //draw title
     title.drawTitle();
 
-    if(topScore > 0){
+    if (topScore > 0) {
       push();
       textSize(15);
       text("Top Score: " + topScore, width / 2, 450);
@@ -82,7 +82,7 @@ function draw() {
     basket = new Basket(178, 280);
     dog = new Dog(205, 280, 0.45);
     abouna_d_game = new Abouna(abouna_d_game_pic, 290, 100, 300, 380, 0.84);
-    abouna_g_game = new Abouna(abouna_g_game_pic, 85, 120, 225, 300, 1);
+    abouna_g_game = new Abouna(abouna_g_game_pic, 220, 240, 300, 700, 0.75);
 
     fallingEmojis = [];
 
@@ -133,13 +133,10 @@ function draw() {
     charDisplay();
     pop();
   }
-  if(screen == "pregame"){
-
-
-    if (startTime === null){
-      startTime = millis()
+  if (screen == "pregame") {
+    if (startTime === null) {
+      startTime = millis();
     }
-
 
     image(tree, 0, 0, 550, 775);
     image(grass, 0, 400, 650, 200);
@@ -149,26 +146,22 @@ function draw() {
     basket.draw();
     basket.ctrlChar();
 
-
     let elapsed = int((millis() - startTime) / 1000);
 
-    push()
-    fill(255,0,0)
-    textSize(40)
-    textFont(titleFont)
-    textAlign(CENTER)
+    push();
+    fill(255, 0, 0);
+    textSize(40);
+    textFont(titleFont);
+    textAlign(CENTER);
     if (elapsed < 3) {
       text(countdown - elapsed, width / 2, height / 2);
-    } 
-    else if (elapsed < 4) {
+    } else if (elapsed < 4) {
       text("GO!", width / 2, height / 2);
-    } 
-    else {
+    } else {
       screen = "game";
       startTime = null;
     }
-    pop()
-    
+    pop();
   }
   if (screen == "game") {
     image(tree, 0, 0, 550, 775);
@@ -267,7 +260,7 @@ function draw() {
     pop();
 
     if (lives == 0) {
-      if(score > topScore){
+      if (score > topScore) {
         topScore = score;
       }
       screen = "gameover";
@@ -474,21 +467,21 @@ function draw() {
     textSize(10);
     text("Select", 427, 570);
     // pop();
-    if(topScore >= 500){
-    fill(200);
-    if (mouseX > 502 && mouseX < 541 && mouseY > 245 && mouseY < 315) {
-      fill(150); // hover color
-    }
+    if (topScore >= 500) {
+      fill(200);
+      if (mouseX > 502 && mouseX < 541 && mouseY > 245 && mouseY < 315) {
+        fill(150); // hover color
+      }
 
-    push();
-    rectMode(CENTER);
-    rect(520, width / 2, 40, 70);
-    pop();
+      push();
+      rectMode(CENTER);
+      rect(520, width / 2, 40, 70);
+      pop();
 
-    fill(0);
-    textSize(15);
-    textAlign(CENTER, CENTER);
-    text(">", 520, width / 2);
+      fill(0);
+      textSize(15);
+      textAlign(CENTER, CENTER);
+      text(">", 520, width / 2);
     }
     pop();
   }
