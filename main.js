@@ -9,8 +9,7 @@ let userTable;
 let fallingEmojis = [];
 let lastEmojiSpawn = 0;
 let score = 0;
-let topScore = 0; //<---- change if you want access to abounas (500 minimum)
-let char;
+let topScore = 500; //<---- change if you want access to abounas (500 minimum)
 let dog, cat, angelina, tim, raul, sponge, dora, tire; // characters
 let gameStartTimer = 0;
 let abounaGDisplay;
